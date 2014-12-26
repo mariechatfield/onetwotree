@@ -44,12 +44,17 @@ function($, Node, Operation) {
    		this.nodes[0] = Node.makeBinary(0, this.nodes[1], this.nodes[2]);
 
    		for (i = 0; i < this.initValues.length; i++) {
-   			this.nodes[i].value = this.initValues[i];
+   			if (this.initValues[i] !== 0) {
+               this.nodes[i].value = this.initValues[i];
+               this.nodes[i].mutable = false;
+            }
    		}
 
    		for (i = 0; i < this.initOps.length; i++) {
-   			if (this.initOps[i] !== 0)
+   			if (this.initOps[i] !== 0) {
 	   			this.nodes[i].op = this.initOps[i];
+               this.nodes[i].op.mutable = false;
+            }
    		}
    	
    	};

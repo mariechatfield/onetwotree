@@ -2,13 +2,13 @@ require.config({
     shim: {
         'boostrap': {
             deps: ['jquery']
-        },
+        }
     },
     baseUrl: '/public/resources/scripts',
     paths: {
         'bootstrap': '/public/vendor/bootstrap.min',
         'jquery': '/public/vendor/jquery.min',
-        'underscore': '/public/vendor/lodash.underscore.min',
+        'hbs': '/public/vendor/require-handlebars-plugin/hbs',
         'config': 'app.config'
     }
 });

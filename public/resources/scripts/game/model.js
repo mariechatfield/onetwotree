@@ -2,9 +2,10 @@ define([
     'jquery',
     'config',
     'game/dataStructures/puzzle',
-    'game/dataStructures/operation'
+    'game/dataStructures/operation',
+    'hbs!/public/resources/templates/board'
 ],
-function($, config, Puzzle, Operation) {
+function($, config, Puzzle, Operation, BoardTemplate) {
 
     'use strict';
 
@@ -21,7 +22,7 @@ function($, config, Puzzle, Operation) {
 
 			this.puzzle = new Puzzle(initValues, initOps);
 
-			return this.setHTML();
+			this.setHTML();
 		};
 
 		this.playTurn = function (index, turnData) {
@@ -34,7 +35,7 @@ function($, config, Puzzle, Operation) {
 
 			console.debug("Set {0} to {1} --> {2}  \t Points: {3}".format(index, turnData, isValid, this.points));
 
-			return this.setHTML();
+			this.setHTML();
 			
 		};
 
@@ -52,25 +53,16 @@ function($, config, Puzzle, Operation) {
 
 		this.setHTML = function () {
 
-	    	var that = this,
-	    		defer = new $.Deferred();
+	    	var boardData = {},
+	    		i;
 
-	        $.ajax({
-	            url: "/public/resources/partials/board.html",
-	            success: function (results) {
-	            	that.html = results;
-	            },
-	            error: function (xhr, status, response) {
-	                that.html = '<h2>' + xhr.status + ': ' + response + '</h2>';
-	            },
-	            // Trigger change when complete so View can render.
-                complete: function () {
-                    $('#workspace').html(that.html);
-                    defer.resolve();
-                }
-	        });
+	    	for (i = 0; i < 15; i++) {
+	    		var node = this.puzzle.nodes[i];
+	    		boardData["node" + i] = {index: i, node: node};
+	    	}
 
-	     	return defer.promise();
+			this.html = BoardTemplate(boardData);
+			$('#workspace').html(this.html);
 
 	    };
 

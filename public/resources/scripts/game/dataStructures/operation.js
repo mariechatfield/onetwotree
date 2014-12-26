@@ -7,6 +7,7 @@ function($) {
 
     function AOperation (symbolIn) {
     	this.symbol = symbolIn;
+    	this.mutable = true;
 	};
 
 	AOperation.prototype.toString = function () {
@@ -57,7 +58,7 @@ function($) {
 
 	/* Finish initializing ANode with nullNode defaults */
 
-	var NULL = new AOperation("?");
+	var NULL = new AOperation("");
 
 	/* Return object with helper functions */
 

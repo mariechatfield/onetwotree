@@ -1,36 +1,41 @@
 @font-face {
-    font-family: SimplePrint;
-    font-size: larger;
-    src: url("/public/resources/fonts/SimplePrint.ttf");
+  font-family: SimplePrint;
+  font-size: larger;
+  src: url("/public/resources/fonts/SimplePrint.ttf");
 }
 
 body {
-    padding-top: 70px;
-    /*font-family: "SimplePrint";*/
-    /*font-size: 500%;*/
+  padding-top: 70px;
+  /*font-family: "SimplePrint";*/
+  /*font-size: 500%;*/
 }
 
 a[view] {
-    cursor: pointer;
-    cursor: hand;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .nodeBox { 
-   position: relative; 
-   width: 100%; /* for IE 6 */
-   /*font-family: "SimplePrint";*/
+  position: relative; 
+  width: 100%; /* for IE 6 */
+  /*font-family: "SimplePrint";*/
+  color: #0033CC;
 }
 
 .nodeBox h4 { 
-   position: absolute; 
-   top: -20px; 
-   left: -3px; 
-   width: 100%;
+  position: absolute; 
+  top: -20px; 
+  left: -3px; 
+  width: 100%;
 }
 
 .nodeBox p {
-	position: absolute; 
-   top: 17px; 
-   left: -3px; 
-   width: 100%;
+  position: absolute; 
+  top: 17px; 
+  left: -3px; 
+  width: 100%;
+}
+
+.final {
+  color: #4C4C4C;
 }

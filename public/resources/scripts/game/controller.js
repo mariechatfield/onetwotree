@@ -11,36 +11,36 @@ function($, GameModel, GameView) {
         var index =  parseInt(event.toElement.id);
         console.log("clicked node " + index);
 
+        // this.gameModel.playTurnValue(index, value);
+
+        // setListeners();
     };
 
     function clickOp (event) {
         var index =  parseInt(event.toElement.id);
         console.log("clicked op " + index);
+
+        // this.gameModel.playTurnOp(index, op);
+
+        // setListeners();
     };
+
+    function setListeners () {
+        $('.node:not(.final)')
+        .click(clickNode);
+
+        $('.op:not(.final)')
+        .click(clickOp);
+    }
 
     return function GameController() {
 
         this.init = function () {
             this.gameModel = new GameModel();
-            this.gameModel.generatePuzzle().done(
-                function () {
-                    $('.node').click(clickNode);
-                    $('.op').click(clickOp);
-                }
-            );
-            
+            this.gameModel.generatePuzzle();
+
+            setListeners();
         };
-
-        this.playTurn = function (index, turn, isValue) {
-            console.debug("Play turn!");
-
-            if (isValue)
-                this.gameModel.playTurnValue(index, turn);
-            else
-                this.gameModel.playTurnOp(index, turn);
-
-            this.gameView.render();
-        }
 
     };
 
