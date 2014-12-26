@@ -3,7 +3,7 @@ define([
     'config',
     'game/dataStructures/puzzle',
     'game/dataStructures/operation',
-    'hbs!/public/resources/templates/board'
+    'hbs!/centarithmetic/public/resources/templates/board'
 ],
 function($, config, Puzzle, Operation, BoardTemplate) {
 

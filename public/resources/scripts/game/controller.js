@@ -3,8 +3,8 @@ define([
     'game/model',
     'game/view',
     'game/dataStructures/operation',
-    'hbs!/public/resources/templates/inputValue',
-    'hbs!/public/resources/templates/inputOp'
+    'hbs!/centarithmetic/public/resources/templates/inputValue',
+    'hbs!/centarithmetic/public/resources/templates/inputOp'
 ],
 function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate) {
 

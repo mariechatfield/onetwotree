@@ -4,11 +4,11 @@ require.config({
             deps: ['jquery']
         }
     },
-    baseUrl: '/public/resources/scripts',
+    baseUrl: '/centarithmetic/public/resources/scripts',
     paths: {
-        'bootstrap': '/public/vendor/bootstrap.min',
-        'jquery': '/public/vendor/jquery.min',
-        'hbs': '/public/vendor/require-handlebars-plugin/hbs',
+        'bootstrap': '/centarithmetic/public/vendor/bootstrap.min',
+        'jquery': '/centarithmetic/public/vendor/jquery.min',
+        'hbs': '/centarithmetic/public/vendor/require-handlebars-plugin/hbs',
         'config': 'app.config'
     }
 });
