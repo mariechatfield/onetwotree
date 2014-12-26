@@ -33,10 +33,7 @@ function($, config, Puzzle, Operation, BoardTemplate) {
 			else
 				this.points += 10;
 
-			console.debug("Set {0} to {1} --> {2}  \t Points: {3}".format(index, turnData, isValid, this.points));
-
 			this.setHTML();
-			
 		};
 
 		this.playTurnValue = function (index, value) {
@@ -63,6 +60,9 @@ function($, config, Puzzle, Operation, BoardTemplate) {
 
 			this.html = BoardTemplate(boardData);
 			$('#workspace').html(this.html);
+
+
+			$("#points").html("Points: " + this.points);
 
 	    };
 

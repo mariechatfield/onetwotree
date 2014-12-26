@@ -39,3 +39,11 @@ a[view] {
 .final {
   color: #4C4C4C;
 }
+
+#points {
+  float: right;
+}
+
+#points:hover{
+  color: inherit;
+}
