@@ -4,11 +4,11 @@
 
 	<map name="node{{index}}map">
 	  <area id="{{index}}node" class="node {{#unless node.mutable}}final{{/unless}}" shape="rect" coords="10,0,60,50">
-	  <area id="{{index}}op" class="op {{#unless node.op.mutable}}final{{/unless}}" shape="circle" coords="33,57,7">
+	  <area id="{{index}}op" class="op" shape="circle" coords="33,57,7">
 	</map>
 
 	<h4 id="{{index}}nodeLabel" class="node {{#unless node.mutable}}final{{/unless}}">{{#if node.value}}{{node.value}}{{/if}}</h4>
-	<p id="{{index}}opLabel" class="op {{#unless node.op.mutable}}final{{/unless}}">{{node.op.symbol}}</p>
+	<p id="{{index}}opLabel" class="op">{{node.op.symbol}}</p>
 </span>
 {{else}}
 <span class="nodeBox">

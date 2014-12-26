@@ -37,7 +37,7 @@ function($) {
 		return x - y;
 	}
 
-	var MULT = new AOperation("*");
+	var MULT = new AOperation("×");
 	MULT.evaluate = function (x, y) {
 		if (x == 0 || y == 0)
 			return 0;
@@ -45,7 +45,7 @@ function($) {
 		return x * y;
 	}
 
-	var DIV = new AOperation("/");
+	var DIV = new AOperation("÷");
 	DIV.evaluate = function (x, y) {
 		if (x == 0 || y == 0)
 			return 0;

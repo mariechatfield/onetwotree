@@ -63,7 +63,7 @@ require(['config', 'game/controller', 'game/dataStructures/operation'], function
     var game = new GameController();
     game.init();
 
-    var count = 0;
+    // var count = 0;
     // var autoTurn = setInterval(function () { 
 
     //     switch (count) {
@@ -88,8 +88,7 @@ require(['config', 'game/controller', 'game/dataStructures/operation'], function
 
     //     count++;
         
-    // }, 1500);
-
+    // }, 100);
 
 });
 
