@@ -1,0 +1,12 @@
+<span id="{{index}}nodeBox" class="nodeBox btn-group btn-group-vertical">
+	<button id="{{index}}node" class="btn btn-default node" {{#unless node.mutable}}disabled="disabled"{{/unless}}>
+		{{#if node.value}}{{node.value}}{{/if}}
+	</button>
+
+	{{#if node.op}}
+	<button id="{{index}}op" class="btn btn-info op">
+		{{node.op.symbol}}
+	</button>
+	{{/if}}
+</span>
+

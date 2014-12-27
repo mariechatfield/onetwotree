@@ -10,34 +10,34 @@ body {
   /*font-size: 500%;*/
 }
 
-a[view] {
-  cursor: pointer;
-  cursor: hand;
+.nodeBox {
+  width: 50px;
+  height: 80px;
 }
 
-.nodeBox { 
-  position: relative; 
-  width: 100%; /* for IE 6 */
-  /*font-family: "SimplePrint";*/
-  color: #0033CC;
+.node {
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  margin: 5px;
 }
 
-.nodeBox h4 { 
-  position: absolute; 
-  top: -20px; 
-  left: -3px; 
-  width: 100%;
+.op {
+  width: 50px;
+  height: 35px;
+  z-index: 2;
 }
 
-.nodeBox p {
-  position: absolute; 
-  top: 17px; 
-  left: -3px; 
-  width: 100%;
+#inputValue {
+  width: 42px;
+  margin-left: -8px;
+  padding: 5px;
+  text-align: center;
 }
 
-.final {
-  color: #4C4C4C;
+#inputOp {
+  width: 42px;
+  margin-left: -8px;
 }
 
 #points {

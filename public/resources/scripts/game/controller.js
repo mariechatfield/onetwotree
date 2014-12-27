@@ -15,9 +15,8 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
     function clickNode (event) {
         var index =  parseInt(event.toElement.id),
             node = gameModel.puzzle.nodes[index];
-        console.log("clicked node " + index);
 
-        $('#input').html(InputValueTemplate(node));
+        $('#' + index + 'node').html(InputValueTemplate(node));
 
         $('#inputValue').focus();
 
@@ -47,22 +46,23 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
         var index =  parseInt(event.toElement.id),
             node = gameModel.puzzle.nodes[index];
         
-        $('#input').html(InputOpTemplate(node));
+        $('#' + index + 'op').html(InputOpTemplate(node));
 
-        $('#addBtn').click(function () {
-            playOp(index, Operation.ADD);
-        });
+        $('#inputOp').change(function (event) {
+            var op;
 
-        $('#subBtn').click(function () {
-            playOp(index, Operation.SUB);
-        });
+            if (!index)
+                return;
 
-        $('#multBtn').click(function () {
-            playOp(index, Operation.MULT);
-        });
+            switch ($('#inputOp').val()) {
+                case 'add': op = Operation.ADD; break;
+                case 'sub': op = Operation.SUB; break;
+                case 'mult': op = Operation.MULT; break;
+                case 'div': op = Operation.DIV; break;
+                default: op = Operation.NULL;
+            }
 
-        $('#divBtn').click(function () {
-            playOp(index, Operation.DIV);
+            playOp(index, op);
         });
 
     };
