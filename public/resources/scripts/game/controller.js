@@ -20,7 +20,7 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
 
         $('#inputValue').focus();
 
-        $('#inputForm').keypress(function(event){
+        $('#inputValue').keypress(function(event){
             var value = parseInt($('#inputValue').val()),
                 valid = false;
             
