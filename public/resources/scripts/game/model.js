@@ -3,40 +3,37 @@ define([
     'config',
     'game/dataStructures/puzzle',
     'game/dataStructures/operation',
-    'hbs!/centarithmetic/public/resources/templates/board'
+    'game/puzzleGenerator'
 ],
-function($, config, Puzzle, Operation, BoardTemplate) {
+function($, config, Puzzle, Operation, PuzzleGenerator) {
 
     'use strict';
 
-    return function GameModel () {
+    return function GameModel (el) {
 
-    	this.html = "";
+    	this.points = 99999;
 
-    	this.points = 0;
+    	this.gameOver = false;
+
+    	this.isWin = true;
 
     	this.generatePuzzle = function () {
 
-    		var initValues = [100, 0, 25, 15, 0, 0, 0, 7, 0, 0, 24, 3, 4, 2, 5];
-	    	var initOps = [0, 0, 0, 0, 0, 0, 0, Operation.ADD(), 0, 0];
+    		this.puzzleSpecs = PuzzleGenerator.Medium();
 
-			this.puzzle = new Puzzle(initValues, initOps);
-
-			this.setHTML();
+			this.puzzle = new Puzzle(this.puzzleSpecs);
 		};
 
 		this.playTurn = function (index, turnData) {
 			var isValid = this.puzzle.nodes[index].verify();
 
 			if (isValid)
-				this.points += 2;
-			else {
-				this.points += 10;
-				$('#' + index + 'node').attr('class', 'btn btn-danger');
-			}
-				
+				this.points -= 10;
+			else 
+				this.points -= 200;
 
-			this.setHTML();
+			this.isWin = this.puzzle.isWin();
+			this.gameOver = this.isWin || this.points <= 0;
 		};
 
 		this.playTurnValue = function (index, value) {
@@ -51,23 +48,12 @@ function($, config, Puzzle, Operation, BoardTemplate) {
 			this.playTurn(index, op);
 		};
 
-		this.setHTML = function () {
-
-	    	var boardData = {},
-	    		i;
-
-	    	for (i = 0; i < 15; i++) {
-	    		var node = this.puzzle.nodes[i];
-	    		boardData["node" + i] = {index: i, node: node};
-	    	}
-
-			this.html = BoardTemplate(boardData);
-			$('#workspace').html(this.html);
-
-
-			$("#points").html("Points: " + this.points);
-
-	    };
+		this.reset = function () {
+			this.puzzle = new Puzzle(this.puzzleSpecs);
+			this.points = 99999;
+			this.gameOver = false;
+			this.isWin = false;
+		}
 
     };
 

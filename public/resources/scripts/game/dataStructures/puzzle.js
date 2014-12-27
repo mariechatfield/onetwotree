@@ -59,11 +59,11 @@ function($, Node, Operation) {
    	
    	};
 
-   	function Puzzle (initValuesIn, initOpsIn) {
+   	function Puzzle (specs) {
 
-   		this.initValues = initValuesIn;
+   		this.initValues = specs.initValues;
 
-   		this.initOps = initOpsIn;
+   		this.initOps = specs.initOps;
 
    		this.nodes = [];
 

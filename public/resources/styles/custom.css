@@ -5,9 +5,7 @@
 }
 
 body {
-  padding-top: 70px;
-  /*font-family: "SimplePrint";*/
-  /*font-size: 500%;*/
+  padding-top: 40px;
 }
 
 .nodeBox {
@@ -46,4 +44,15 @@ body {
 
 #points:hover{
   color: inherit;
+}
+
+#alert {
+  z-index: 3;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+
+.gameOver {
+  opacity: 0.5;
 }

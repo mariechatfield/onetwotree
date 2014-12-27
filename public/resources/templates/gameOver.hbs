@@ -1,0 +1,12 @@
+<div class="alert {{#if isWin}}alert-success{{else}}alert-danger{{/if}}">
+	{{#if isWin}} <h2>You won!</h2><h4>Score: {{points}}</h4>
+	{{else}} <h2>Game Over!</h2><h4>Better luck next time!</h4>
+	{{/if}}
+	<br>
+	<br>
+	<div class="btn-group btn-group-vertical">
+		<button id="retry" class="btn btn-default">Retry</button>
+		<br>
+		<button id="playNew" class="btn btn-default">Play New Puzzle</button>
+	</div>
+</div>

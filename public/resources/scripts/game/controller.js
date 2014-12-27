@@ -10,7 +10,7 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
 
     'use strict';
 
-    var gameModel;
+    var gameModel, gameView;
 
     function clickNode (event) {
         var index =  parseInt(event.toElement.id),
@@ -67,12 +67,16 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
 
     function playValue(index, value) {
         gameModel.playTurnValue(index, value);
+        gameView.render();
+
         setListeners();
         $('#input').empty();   
     };
 
     function playOp(index, op) {
         gameModel.playTurnOp(index, op);
+        gameView.render();
+
         setListeners();
         $('#input').empty();
     };
@@ -83,34 +87,44 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
 
         $('.op:not(.final)')
         .click(clickOp);
-
-
     }
 
     return function GameController() {
 
         this.init = function () {
-            gameModel = new GameModel();
-            gameModel.generatePuzzle();
+            gameModel = new GameModel('#workspace');
+            gameView = new GameView('#workspace', gameModel, this);
 
-            setListeners();
+            gameModel.generatePuzzle();
+            
+            this.startGame();
         };
 
-        // this.playTurn = function (index, turn, isValue) {
-        //     console.debug("Play turn!");
+        this.reset = function () {
+            gameModel.reset();
+            this.startGame();
+        };
 
-        //     if (isValue)
-        //         this.gameModel.playTurnValue(index, turn);
-        //     else
-        //         this.gameModel.playTurnOp(index, turn);
+        this.startGame = function () {
+            gameView.render();
 
-        //     setListeners();
-        // }
+            setListeners();
+
+            // Decrement points on a timer
+            var pointsTimer = setInterval(function () { 
+
+                gameModel.points -= 1;
+                if (gameModel.points <= 0) {
+                    gameModel.gameOver = true;
+                }
+
+                if (gameModel.gameOver)
+                    clearInterval(pointsTimer);
+
+                gameView.renderPoints();
+
+            }, 400);
+        };
 
     };
-
-   
-
-    
-
 });
