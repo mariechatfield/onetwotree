@@ -13,14 +13,14 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
     var gameModel, gameView;
 
     function clickNode (event) {
-        var index =  parseInt(event.toElement.id),
+        var index =  parseInt(event.target.id),
             node = gameModel.puzzle.nodes[index];
 
         $('#' + index + 'node').html(InputValueTemplate(node));
 
         $('#inputValue').focus();
 
-        $('#inputForm').keydown(function(event){
+        $('#inputForm').keypress(function(event){
             var value = parseInt($('#inputValue').val()),
                 valid = false;
             
@@ -43,10 +43,12 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
     };
 
     function clickOp (event) {
-        var index =  parseInt(event.toElement.id),
+        var index =  parseInt(event.target.id),
             node = gameModel.puzzle.nodes[index];
         
         $('#' + index + 'op').html(InputOpTemplate(node));
+
+        $('#inputOp').focus();
 
         $('#inputOp').change(function (event) {
             var op;
