@@ -24,7 +24,7 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
             var value = parseInt($('#inputValue').val()),
                 valid = false;
             
-            if (!Number.isInteger(value) || (value < 0) || (value > 100)) {
+            if ((value < 0) || (value > 100)) {
                 $('#inputForm').attr('class', 'form-group has-error');
             } else if (value == 0) {
                 $('#inputForm').attr('class', 'form-group');   
@@ -38,7 +38,7 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
         $('#inputValue').change(function(event) {
             var value = parseInt($('#inputValue').val());
 
-            if (Number.isInteger(value) && (value > 0) && (value <= 100))
+            if ((value > 0) && (value <= 100))
                 playValue(index, value);        
         });
 
