@@ -32,12 +32,14 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
                 valid = true;
                 $('#inputForm').attr('class', 'form-group has-success');
             }
+            
+        });
 
-            if(event.keyCode == 13) {
-                event.preventDefault();
-                if (valid)
-                    playValue(index, value);
-            }
+        $('#inputValue').change(function(event) {
+            var value = parseInt($('#inputValue').val());
+
+            if (Number.isInteger(value) && (value > 0) && (value <= 100))
+                playValue(index, value);        
         });
 
     };
