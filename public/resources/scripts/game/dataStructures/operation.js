@@ -18,42 +18,58 @@ function($) {
 		return 0;
 	}
 
-	var ADD = new AOperation("+");
-	ADD.evaluate = function (x, y) {
-		if (x == 0 || y == 0)
-			return 0;
+	function ADD () {
+		var op = new AOperation("+");
+		op.evaluate = function (x, y) {
+			if (x == 0 || y == 0)
+				return 0;
 
-		return x + y;
+			return x + y;
+		}
+
+		return op;
 	}
 
-	var SUB = new AOperation("-");
-	SUB.evaluate = function (x, y) {
-		if (x == 0 || y == 0)
-			return 0;
+	function SUB () {
+		var op = new AOperation("-");
+		op.evaluate = function (x, y) {
+			if (x == 0 || y == 0)
+				return 0;
 
-		if (x <= y)
-			return -1;
+			if (x <= y)
+				return -1;
 
-		return x - y;
+			return x - y;
+		}
+
+		return op;
+	}	
+	
+	function MULT () {
+		var op = new AOperation("×");
+		op.evaluate = function (x, y) {
+			if (x == 0 || y == 0)
+				return 0;
+
+			return x * y;
+		}
+
+		return op;
 	}
 
-	var MULT = new AOperation("×");
-	MULT.evaluate = function (x, y) {
-		if (x == 0 || y == 0)
-			return 0;
+	function DIV () {
+		var op = new AOperation("÷");
+		op.evaluate = function (x, y) {
+			if (x == 0 || y == 0)
+				return 0;
 
-		return x * y;
-	}
+			if (x % y != 0)
+				return -1;
 
-	var DIV = new AOperation("÷");
-	DIV.evaluate = function (x, y) {
-		if (x == 0 || y == 0)
-			return 0;
+			return x / y;
+		}
 
-		if (x % y != 0)
-			return -1;
-
-		return x / y;
+		return op;
 	}
 
 	/* Finish initializing ANode with nullNode defaults */

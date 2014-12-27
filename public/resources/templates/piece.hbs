@@ -1,10 +1,13 @@
 <span id="{{index}}nodeBox" class="nodeBox btn-group btn-group-vertical">
-	<button id="{{index}}node" class="btn {{#if node.valid}}btn-default{{else}}btn-danger{{/if}} node" {{#unless node.mutable}}disabled="disabled"{{/unless}}>
+	<button id="{{index}}node" 
+	class="btn {{#if node.valid}}btn-default{{else}}btn-danger{{/if}} node" 
+	{{#unless node.mutable}}disabled="disabled"{{/unless}}>
 		{{#if node.value}}{{node.value}}{{/if}}
 	</button>
 
 	{{#if node.op}}
-	<button id="{{index}}op" class="btn btn-info op">
+	<button id="{{index}}op" class="btn btn-info op"
+	{{#unless node.op.mutable}}disabled="disabled"{{/unless}}>
 		{{node.op.symbol}}
 	</button>
 	{{/if}}

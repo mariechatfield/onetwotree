@@ -52,10 +52,10 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
             var op;
 
             switch ($('#inputOp').val()) {
-                case 'add': op = Operation.ADD; break;
-                case 'sub': op = Operation.SUB; break;
-                case 'mult': op = Operation.MULT; break;
-                case 'div': op = Operation.DIV; break;
+                case 'add': op = Operation.ADD(); break;
+                case 'sub': op = Operation.SUB(); break;
+                case 'mult': op = Operation.MULT(); break;
+                case 'div': op = Operation.DIV(); break;
                 default: op = Operation.NULL;
             }
 
