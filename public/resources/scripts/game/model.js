@@ -30,8 +30,11 @@ function($, config, Puzzle, Operation, BoardTemplate) {
 
 			if (isValid)
 				this.points += 2;
-			else
+			else {
 				this.points += 10;
+				$('#' + index + 'node').attr('class', 'btn btn-danger');
+			}
+				
 
 			this.setHTML();
 		};

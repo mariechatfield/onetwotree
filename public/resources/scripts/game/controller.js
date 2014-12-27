@@ -51,9 +51,6 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
         $('#inputOp').change(function (event) {
             var op;
 
-            if (!index)
-                return;
-
             switch ($('#inputOp').val()) {
                 case 'add': op = Operation.ADD; break;
                 case 'sub': op = Operation.SUB; break;
@@ -62,7 +59,8 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
                 default: op = Operation.NULL;
             }
 
-            playOp(index, op);
+            if (index >= 0 && index < gameModel.puzzle.nodes.length)
+                playOp(index, op);
         });
 
     };

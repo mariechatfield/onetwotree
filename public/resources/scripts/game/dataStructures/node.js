@@ -16,21 +16,25 @@ function($, Operation) {
     		return true;
     	}
 
+    	this.valid = true;
+
 	};
 
 	function verifyBinaryNode (node) {
-		if (node.op === undefined)
+		if (node.value === 0)
 			return true;
 
-		if (node.op === Operation.NULL)
+		if (node.op === undefined || node.op === Operation.NULL)
 			return true;
 
-		if (node.leftChild === NULL || node.rightChild === NULL)
+		if (node.leftChild.value == 0 || node.rightChild.value == 0)
 			return true;
 
 		var result = node.op.evaluate(node.leftChild.value, node.rightChild.value);
 
-		return result === node.value;	
+		node.valid = result === node.value;
+
+		return node.valid;
 	}
 
 	function BinaryNode (valueIn, leftChildIn, rightChildIn) {
@@ -39,6 +43,9 @@ function($, Operation) {
 		node.op = Operation.NULL;
 		node.leftChild = leftChildIn;
 		node.rightChild = rightChildIn;
+
+		leftChildIn.rightParent = node;
+		rightChildIn.leftParent = node;
 
 		node.verify = function () {
 			var valid = verifyBinaryNode(this);
@@ -50,6 +57,7 @@ function($, Operation) {
 			if (this.rightParent !== NULL) {
 				valid = valid && verifyBinaryNode(this.rightParent);
 			}
+
 
 			return valid;
 		}
