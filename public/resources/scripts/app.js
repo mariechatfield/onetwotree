@@ -44,8 +44,13 @@ var findBootstrapEnvironment = function findBootstrapEnvironment() {
     }
 };
 
+
 // Initialize Backbone Router
-require(['config', 'game/controller', 'game/dataStructures/operation'], function (config, GameController, Operation) {
+require([
+    'config', 
+    'game/controller', 
+    'game/dataStructures/operation'
+], function (config, GameController, Operation) {
 
     // First, checks if it isn't implemented yet.
     if (!String.prototype.format) {
@@ -60,35 +65,86 @@ require(['config', 'game/controller', 'game/dataStructures/operation'], function
       };
     }
 
-    var game = new GameController();
-    game.init();
+    var game;
 
-    // var count = 0;
-    // var autoTurn = setInterval(function () { 
+    var playNewGame = function () {
 
-    //     switch (count) {
-    //         case 0: game.playTurn(1, 75, true); break;
-    //         case 1: game.playTurn(0, Operation.SUB, false); break;
-    //         case 2: game.playTurn(0, Operation.ADD, false); break;
-    //         case 3: game.playTurn(4, 5, true); break;
-    //         case 4: game.playTurn(5, 20, true); break;
-    //         case 5: game.playTurn(6, 8, true); break;
-    //         case 6: game.playTurn(8, 2, true); break;
-    //         case 7: game.playTurn(9, 10, true); break;
-    //         case 8: game.playTurn(1, Operation.MULT, false); break;
-    //         case 9: game.playTurn(2, Operation.ADD, false); break;
-    //         case 10: game.playTurn(3, Operation.ADD, false); break;
-    //         case 11: game.playTurn(4, Operation.SUB, false); break;
-    //         case 12: game.playTurn(5, Operation.MULT, false); break;
-    //         case 13: game.playTurn(6, Operation.DIV, false); break;
-    //         case 14: game.playTurn(8, Operation.DIV, false); break;
-    //         case 15: game.playTurn(9, Operation.MULT, false); break;
-    //         default: clearInterval(autoTurn);
-    //     }
+        if (game)
+            game.cancel();
 
-    //     count++;
-        
-    // }, 100);
+        $('#points').html('');
+        $('#workspace').html('');
+        $('#workspace').hide();
+
+        $('#newGameForm').show();
+    };
+
+    var reset = function () {
+        game.reset();
+    }
+
+    $('#timerOn').click(function () {
+        $('#timerOn').attr('class', 'btn btn-warning active');
+        $('#timerOff').attr('class', 'btn btn-warning');
+    });
+
+    $('#timerOff').click(function () {
+        $('#timerOn').attr('class', 'btn btn-warning');
+        $('#timerOff').attr('class', 'btn btn-warning active');
+    });
+
+    $('#easy').click(function () {
+        $('#easy').attr('class', 'btn btn-warning active');
+        $('#medium').attr('class', 'btn btn-warning');
+        $('#hard').attr('class', 'btn btn-warning');
+    });
+
+    $('#medium').click(function () {
+        $('#easy').attr('class', 'btn btn-warning');
+        $('#medium').attr('class', 'btn btn-warning active');
+        $('#hard').attr('class', 'btn btn-warning');
+    });
+
+    $('#hard').click(function () {
+        $('#easy').attr('class', 'btn btn-warning');
+        $('#medium').attr('class', 'btn btn-warning');
+        $('#hard').attr('class', 'btn btn-warning active');
+    });
+
+    $('#start').click(function () {
+        $('#workspace').show();
+        $('#newGameForm').hide();
+
+        var isTimer, difficulty;
+
+        if ($('#timerOn').hasClass('btn btn-warning active'))
+            isTimer = true;
+        else
+            isTimer = false;
+
+        if ($('#easy').hasClass('btn btn-warning active'))
+            difficulty = "Easy";
+        else if ($('#medium').hasClass('btn btn-warning active'))
+            difficulty = "Medium";
+        else
+            difficulty = "Hard";
+
+
+        function setAppListeners() {
+            $('#reset').click(reset);
+            $('#playNew').click(playNewGame);
+        };
+
+        game = new GameController({
+            timer: isTimer,
+            difficulty: difficulty,
+            setAppListeners: setAppListeners
+        });
+        game.init();
+
+    });
+
+    playNewGame();
 
 });
 

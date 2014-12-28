@@ -16,10 +16,8 @@ permalink: /index.html
          Kuler Theme: https://kuler.adobe.com/cablah-color-theme-4143174/ -->
     <link rel="stylesheet" href="/centarithmetic/public/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="/centarithmetic/public/resources/styles/custom.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Load the main application script, which initializes the Backbone Router
-         and handles fetching / rendering each page in the single-page application. -->
+    <!-- Load the main application script. -->
     <script data-main="/centarithmetic/public/resources/scripts/app" src="/centarithmetic/public/vendor/require.js"></script>
 
   </head>
@@ -33,7 +31,7 @@ permalink: /index.html
 
         <a class="navbar-brand">centarithmetic</a>
 
-        <a id="points" class="navbar-brand">Points: 0</a>
+        <a id="points" class="navbar-brand"></a>
 
     </nav>
 
@@ -41,14 +39,47 @@ permalink: /index.html
     <div class="container">
 
         <div class="row">
-            <div class="col-xs-0 col-sm-2 col-md-3 col-lg-4"></div>
-            <div class="col-xs-12 col-sm-10 col-md-6 col-lg-4 text-center">
+            <div class="col-xs-0 col-sm-0 col-md-1 col-lg-3"></div>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-6 text-center">
 
-                <!-- Placeholder: Content of each view is inserted here. -->
+                <div id="newGameForm">
+                    <h2 class="text-info">Start New Game</h2>
+                    <br>
+
+                    <p><b> Combine numbers at the bottom of the tree to make the number at the top! </b></p>
+                    <p> Check your math - you lose points for every error. For an extra challenge, race against the clock. </p>
+
+                    <br>
+                    <div class="gameForm">
+                        <h4>Timer</h4>
+                        <div id="inputTimer" class="btn-group">
+                            <button id="timerOn" class="btn btn-warning active">On</button>
+                            <button id="timerOff" class="btn btn-warning">Off</button>
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <div class="gameForm">
+                        <h4>Difficulty</h4>
+                        <div id="inputDifficulty" class="btn-group">
+                            <button id="easy" class="btn btn-warning">Easy</button>
+                            <button id="medium" class="btn btn-warning active">Medium</button>
+                            <button id="hard" class="btn btn-warning">Hard</button>
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <button id="start" class="btn btn-info">Start</button>
+
+                    <br>
+                </div>
+
                 <div id="workspace"></div>
 
             </div>
-            <div class="col-xs-0 col-sm-2 col-md-3 col-lg-4"></div>
+            <div class="col-xs-0 col-sm-0 col-md-1 col-lg-3"></div>
         </div>
         <!-- /.row -->
 

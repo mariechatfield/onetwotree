@@ -8,7 +8,7 @@ function($, config, BoardTemplate, GameOverTemplate) {
 
     'use strict';
 
-	return function GameView (el, model, controller) {
+	return function GameView (el, model) {
 
 		/**
 	     * Render the game view.
@@ -40,14 +40,6 @@ function($, config, BoardTemplate, GameOverTemplate) {
 				$('#board').attr('class', 'gameOver');
 
 				$('#alert').html(GameOverTemplate(model));
-
-				$('#retry').click(function () {
-					controller.reset()
-				});
-
-				$('#playNew').click(function ()  {
-					controller.init()
-				});
 			}
 	    }
 

@@ -2,27 +2,25 @@ define([
     'jquery',
     'config',
     'game/dataStructures/puzzle',
-    'game/dataStructures/operation',
-    'game/puzzleGenerator'
+    'game/dataStructures/operation'
 ],
-function($, config, Puzzle, Operation, PuzzleGenerator) {
+function($, config, Puzzle, Operation) {
 
     'use strict';
 
-    return function GameModel (el) {
+    var MAX_POINTS = 100000;
 
-    	this.points = 99999;
+    return function GameModel (el, puzzleSpecs) {
+
+    	this.puzzleSpecs = puzzleSpecs;
+
+    	this.puzzle = new Puzzle(this.puzzleSpecs);
+
+    	this.points = MAX_POINTS;
 
     	this.gameOver = false;
 
     	this.isWin = true;
-
-    	this.generatePuzzle = function () {
-
-    		this.puzzleSpecs = PuzzleGenerator.Medium();
-
-			this.puzzle = new Puzzle(this.puzzleSpecs);
-		};
 
 		this.playTurn = function (index, turnData) {
 			var isValid = this.puzzle.nodes[index].verify();
@@ -50,13 +48,11 @@ function($, config, Puzzle, Operation, PuzzleGenerator) {
 
 		this.reset = function () {
 			this.puzzle = new Puzzle(this.puzzleSpecs);
-			this.points = 99999;
+			this.points = MAX_POINTS;
 			this.gameOver = false;
 			this.isWin = false;
 		}
 
     };
-
-    
 
 });

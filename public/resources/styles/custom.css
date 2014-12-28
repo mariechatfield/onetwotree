@@ -6,6 +6,7 @@
 
 body {
   padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .nodeBox {
@@ -42,8 +43,8 @@ body {
   float: right;
 }
 
-#points:hover{
-  color: inherit;
+.navbar .navbar-brand:hover{
+  color: #73a3a2;
 }
 
 #alert {

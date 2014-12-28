@@ -3,14 +3,15 @@ define([
     'game/model',
     'game/view',
     'game/dataStructures/operation',
+    'game/puzzleGenerator',
     'hbs!/centarithmetic/public/resources/templates/inputValue',
     'hbs!/centarithmetic/public/resources/templates/inputOp'
 ],
-function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate) {
+function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate, InputOpTemplate) {
 
     'use strict';
 
-    var gameModel, gameView;
+    var gameModel, gameView, setAppListeners;
 
     function clickNode (event) {
         var index =  parseInt(event.target.id),
@@ -91,43 +92,70 @@ function($, GameModel, GameView, Operation, InputValueTemplate, InputOpTemplate)
 
         $('.op:not(.final)')
         .click(clickOp);
+
+        setAppListeners();
     }
 
-    return function GameController() {
+    return function GameController(settings) {
+
+        this.settings = settings;
+
+        setAppListeners = settings.setAppListeners;
 
         this.init = function () {
-            gameModel = new GameModel('#workspace');
+
+           var puzzleSpecs;
+
+           switch (this.settings.difficulty) {
+                case 'Easy': puzzleSpecs = PuzzleGenerator.Easy(); break;
+                case 'Medium': puzzleSpecs = PuzzleGenerator.Medium(); break;
+                case 'Hard': puzzleSpecs = PuzzleGenerator.Hard(); break;
+           }
+
+            gameModel = new GameModel('#workspace', puzzleSpecs);
             gameView = new GameView('#workspace', gameModel, this);
 
-            gameModel.generatePuzzle();
-            
             this.startGame();
         };
 
         this.reset = function () {
+            this.cancel();
             gameModel.reset();
             this.startGame();
         };
 
+        this.cancel = function () {
+            clearInterval(this.pointsTimer);
+            gameModel.points = 0;
+        }
+
         this.startGame = function () {
+            var that = this;
+
             gameView.render();
 
             setListeners();
 
-            // Decrement points on a timer
-            var pointsTimer = setInterval(function () { 
+            this.pointsTimer;
 
-                gameModel.points -= 1;
-                if (gameModel.points <= 0) {
-                    gameModel.gameOver = true;
-                }
+            if (settings.timer) {
 
-                if (gameModel.gameOver)
-                    clearInterval(pointsTimer);
+                // Decrement points on a timer
+                this.pointsTimer = setInterval(function () { 
 
-                gameView.renderPoints();
+                    gameModel.points -= 1;
+                    if (gameModel.points <= 0) {
+                        gameModel.gameOver = true;
+                    }
 
-            }, 400);
+                    if (gameModel.gameOver)
+                        clearInterval(that.pointsTimer);
+
+                    gameView.renderPoints();
+
+                }, 400);
+
+            }
         };
 
     };
