@@ -12,24 +12,50 @@ function($, Node, Operation) {
     	var i;
 
    		/* Initialize all nodes as null. */
-   		for (i = 0; i < 15; i++) {
+   		for (i = 0; i < this.numNodes; i++) {
    			this.nodes.push(Node.NULL);
    		}
 
    		/* Set up empty nodes with correct edges. */
 
-   		/* Row 5 */
-   		this.nodes[14] = Node.makeUnary(0);
-   		this.nodes[13] = Node.makeUnary(0);
-   		this.nodes[12] = Node.makeUnary(0);
-         this.nodes[11] = Node.makeUnary(0);
-   		this.nodes[10] = Node.makeUnary(0);
+         if (this.numNodes == 21) {
+            /* Row 6 */
+            this.nodes[20] = Node.makeUnary(0);
+            this.nodes[19] = Node.makeUnary(0);
+            this.nodes[18] = Node.makeUnary(0);
+            this.nodes[17] = Node.makeUnary(0);
+            this.nodes[16] = Node.makeUnary(0);
+            this.nodes[15] = Node.makeUnary(0);
 
-   		/* Row 4 */
-   		this.nodes[9] = Node.makeBinary(0, this.nodes[13], this.nodes[14]);
-   		this.nodes[8] = Node.makeBinary(0, this.nodes[12], this.nodes[13]);
-   		this.nodes[7] = Node.makeBinary(0, this.nodes[11], this.nodes[12]);
-   		this.nodes[6] = Node.makeBinary(0, this.nodes[10], this.nodes[11]);
+            /* Row 5 */
+            this.nodes[14] = Node.makeBinary(0, this.nodes[19], this.nodes[20]);
+            this.nodes[13] = Node.makeBinary(0, this.nodes[18], this.nodes[19]);
+            this.nodes[12] = Node.makeBinary(0, this.nodes[17], this.nodes[18]);
+            this.nodes[11] = Node.makeBinary(0, this.nodes[16], this.nodes[17]);
+            this.nodes[10] = Node.makeBinary(0, this.nodes[15], this.nodes[16]);
+
+         } else if (this.numNodes == 15) {
+            /* Row 5 */
+            this.nodes[14] = Node.makeUnary(0);
+            this.nodes[13] = Node.makeUnary(0);
+            this.nodes[12] = Node.makeUnary(0);
+            this.nodes[11] = Node.makeUnary(0);
+            this.nodes[10] = Node.makeUnary(0);
+         }
+
+         if (this.numNodes > 10) {
+            /* Row 4 */
+            this.nodes[9] = Node.makeBinary(0, this.nodes[13], this.nodes[14]);
+            this.nodes[8] = Node.makeBinary(0, this.nodes[12], this.nodes[13]);
+            this.nodes[7] = Node.makeBinary(0, this.nodes[11], this.nodes[12]);
+            this.nodes[6] = Node.makeBinary(0, this.nodes[10], this.nodes[11]);
+         } else {
+            /* Row 3 */
+            this.nodes[9] = Node.makeUnary(0);
+            this.nodes[8] = Node.makeUnary(0);
+            this.nodes[7] = Node.makeUnary(0);
+            this.nodes[6] = Node.makeUnary(0);
+         }
 
    		/* Row 3 */
    		this.nodes[5] = Node.makeBinary(0, this.nodes[8], this.nodes[9]);
@@ -65,6 +91,8 @@ function($, Node, Operation) {
 
    		this.initOps = specs.initOps;
 
+         this.numNodes = specs.numNodes;
+
    		this.nodes = [];
 
    		this.init = init;
@@ -73,31 +101,13 @@ function($, Node, Operation) {
 
    	};
 
-   	Puzzle.prototype.toString = function () {
-   		
-   		return "" + 
-   			"<p>{0}</p>".format(this.nodes[0].value) +
-   			"<p>{0}</p>".format(this.nodes[0].op) +
-   			
-   			"<p>{0}...{1}</p>".format(this.nodes[1].value, this.nodes[2].value) + 
-   			"<p>{0}...{1}</p>".format(this.nodes[1].op, this.nodes[2].op) + 
-   			
-   			"<p>{0}...{1}...{2}</p>".format(this.nodes[3].value, this.nodes[4].value, this.nodes[5].value) + 
-			"<p>{0}...{1}...{2}</p>".format(this.nodes[3].op, this.nodes[4].op, this.nodes[5].op) + 
-			
-			"<p>{0}...{1}...{2}...{3}</p>".format(this.nodes[6].value, this.nodes[7].value, this.nodes[8].value, this.nodes[9].value) + 
-			"<p>{0}...{1}...{2}...{3}</p>".format(this.nodes[6].op, this.nodes[7].op, this.nodes[8].op, this.nodes[9].op) + 
-			
-			"<p>{0}...{1}...{2}...{3}...{4}</p>".format(this.nodes[10].value, this.nodes[11].value, this.nodes[12].value, this.nodes[13].value, this.nodes[14].value); 
-   	};
-
    	Puzzle.prototype.isWin = function () {
 
    		var i;
 
    		var allValid = true;
 
-   		for (i = 14; i >= 0; i--) {
+   		for (i = this.numNodes-1; i >= 0; i--) {
    			var node = this.nodes[i];
 
    			/* Check if node's value has been set */

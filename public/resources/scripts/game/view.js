@@ -19,10 +19,14 @@ function($, config, BoardTemplate, GameOverTemplate) {
 	    	var boardData = {},
 	    		i;
 
-	    	for (i = 0; i < 15; i++) {
+	    	for (i = 0; i < model.puzzle.numNodes; i++) {
 	    		var node = model.puzzle.nodes[i];
 	    		boardData["node" + i] = {index: i, node: node};
 	    	}
+
+	    	boardData.easy = model.puzzle.numNodes == 10;
+	    	boardData.medium = model.puzzle.numNodes == 15;
+	    	boardData.hard = model.puzzle.numNodes == 21;
 
 			$(el).html(BoardTemplate(boardData));
 

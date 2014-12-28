@@ -9,7 +9,8 @@ function($, Operation) {
     function Easy() {
         return {
             initValues: [100, 50],
-            initOps: []
+            initOps: [],
+            numNodes: 10
         };
     }
 
@@ -18,8 +19,10 @@ function($, Operation) {
 	    var initOps = [0, 0, 0, 0, 0, 0, 0, Operation.ADD(), 0, 0];
 
 	    return {
+
 	    	initValues: initValues,
-	    	initOps: initOps
+	    	initOps: initOps,
+            numNodes: 15
 	    };
     }
 
@@ -27,7 +30,8 @@ function($, Operation) {
 
         return {
             initValues: [100],
-            initOps: []
+            initOps: [],
+            numNodes: 21
         };
 
     }
