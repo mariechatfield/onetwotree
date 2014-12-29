@@ -8,6 +8,13 @@ function($, config, BoardTemplate, GameOverTemplate) {
 
     'use strict';
 
+    function setNodeBoxSize () {
+    	var maxWidth = Math.floor($('#workspace').width() / 7),
+            maxHeight = Math.floor(maxWidth * 1.4);
+
+        $('.nodeBox').css({'width': maxWidth + 'px', 'height': maxHeight + 'px'});
+    }
+
 	return function GameView (el, model) {
 
 		/**
@@ -31,6 +38,9 @@ function($, config, BoardTemplate, GameOverTemplate) {
 			$(el).html(BoardTemplate(boardData));
 
 			this.renderPoints();
+
+			setNodeBoxSize();
+			$(window).resize(setNodeBoxSize);
 
 	    };
 

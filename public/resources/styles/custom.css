@@ -9,32 +9,28 @@ body {
   padding-bottom: 40px;
 }
 
-.nodeBox {
-  width: 45px;
-  height: 80px;
-}
-
 .node {
-  height: 45px;
+  height: 55%;
   z-index: 1;
-  margin: 3px;
-  padding: 1px;
+  margin: 5%;
+  padding: 10%;
 }
 
 .op {
-  height: 30px;
+  height: 40%;
   z-index: 2;
-  padding: 1px;
+  padding: 5%;
 }
 
 #inputValue {
-  width: 40px;
+  width: 95%;
+  height: 95%;
   padding: 5px;
-  text-align: center;
 }
 
 #inputOp {
-  width: 40px;
+  width: 95%;
+  vertical-align: center;
 }
 
 #points {
