@@ -8,12 +8,19 @@ function($, config, BoardTemplate, GameOverTemplate) {
 
     'use strict';
 
+    var maxNodesPerRow;
+
     function setNodeBoxSize () {
-    	var maxWidth = Math.floor($('#workspace').width() / 7),
-            maxHeight = Math.floor(maxWidth * 1.4);
+    	var maxNodes, maxWidth, maxHeight;
+
+    	maxWidth = Math.floor($('#workspace').width() / (maxNodesPerRow + 1));
+       	maxHeight = Math.floor(maxWidth * 1.4);
 
         $('.nodeBox').css({'width': maxWidth + 'px', 'height': maxHeight + 'px'});
     }
+
+    /* Make sure handler is only attached once. */
+	$(window).off('resize').on('resize', setNodeBoxSize);
 
 	return function GameView (el, model) {
 
@@ -39,9 +46,14 @@ function($, config, BoardTemplate, GameOverTemplate) {
 
 			this.renderPoints();
 
-			setNodeBoxSize();
-			$(window).resize(setNodeBoxSize);
+			if (model.puzzle.numNodes === 10)
+				maxNodesPerRow = 4;
+			else if (model.puzzle.numNodes === 15)
+				maxNodesPerRow = 5;
+			else if (model.puzzle.numNodes === 21)
+				maxNodesPerRow = 6;
 
+			setNodeBoxSize();
 	    };
 
 	    this.renderPoints = function () {
