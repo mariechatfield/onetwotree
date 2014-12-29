@@ -20,7 +20,7 @@ function($, config, Puzzle, Operation) {
 
     	this.gameOver = false;
 
-    	this.isWin = true;
+    	this.isWin = false;
 
 		this.playTurn = function (index, turnData) {
 			var isValid = this.puzzle.nodes[index].verify();

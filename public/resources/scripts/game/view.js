@@ -38,7 +38,7 @@ function($, config, BoardTemplate, GameOverTemplate) {
 	    	$("#points").html("Points: " + model.points);
 
 	    	if (model.gameOver) {
-				$('.node').attr('disabled', 'disabled');
+	    		$('.node').attr('disabled', 'disabled');
 				$('.op').attr('disabled', 'disabled');
 
 				$('#board').attr('class', 'gameOver');
