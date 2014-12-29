@@ -7,22 +7,22 @@ function(Operation) {
 		factors = new Array(101), 
 		multiples = new Array(101);
 
-	for (i = 1; i < 101; i++) {
+	for (i = 0; i < 101; i++) {
 		factors[i] = [];
 		multiples[i] = [];
 	}
 
-	for (i = 1; i < 101; i++) {
+	for (i = 2; i < 101; i++) {
 		for (j = 2; j < 101; j++) {
 			if (i * j <= 100)
-				multiples[i].push(j);
+				multiples[i].push(i * j);
 			else
 				break;
 		}
 
 		for (j = 2; j < i; j++) {
 			if (i % j == 0) {
-				factors[i].push(j);
+				factors[i].push(i / j);
 			}
 		}
 	}
@@ -33,28 +33,40 @@ function(Operation) {
             left, right, op,
             randIndex;
 
-        if (parent < 100 && parent > 1)
-            possible.push(Operation.ADD());
-        if (parent > 1)
-            possible.push(Operation.SUB());
         if (factors[parent].length > 0)
             possible.push(Operation.MULT());
         if (multiples[parent].length > 0)
             possible.push(Operation.DIV());
 
+        if (possible.length == 0) {
+        	if (parent < 100 && parent > 2)
+	            possible.push(Operation.ADD());
+	        if (parent > 2)
+	            possible.push(Operation.SUB());
+        }
+
         randIndex = Math.floor(Math.random() * (possible.length - 1));
+
+        if (randIndex < 0)
+        	return false;
+
         op = possible[randIndex];
 
         switch (op.symbol) {
             case '+':
             {
-                left = Math.floor(Math.random() * (parent - 1)) + 1;
+            	if (factors[parent].length > 0) {
+            		left = factors[parent][Math.floor(Math.random() * factors[parent].length)];
+            	}
+            	else {
+	                left = Math.floor(Math.random() * (parent - 1)) + 1;
+	            }
                 right = parent - left;
                 break;
             }
             case '-':
             {
-                left = Math.floor(Math.random() * (100 - parent + 1)) + parent;
+            	left = Math.floor(Math.random() * (100 - parent + 1)) + parent;
                 right = left - parent;
                 break;
             }
@@ -72,14 +84,13 @@ function(Operation) {
                 right = left / parent;
                 break;
             }
-           	default: {
-           		return false;
-           	}
         }
 
         nodes[leftIndex] = left;
         nodes[rightIndex] = right;
         ops[parentIndex] = op;
+
+        // console.debug("assign " + parentIndex + op + "(" + left + ", " + right + ")");
 
         return true;
 
@@ -89,10 +100,9 @@ function(Operation) {
     	var possible = [],
     		parent = nodes[parentIndex],
     		right = nodes[rightIndex],
-            left, op,
             randIndex;
 
-        if (parent - right > 0)
+        if (parent - right > 2)
         	possible.push({op: Operation.ADD(), left: parent - right});
 
         if (parent + right < 100) 
@@ -112,6 +122,8 @@ function(Operation) {
         nodes[leftIndex] = possible[randIndex].left;
         ops[parentIndex] = possible[randIndex].op;
 
+        // console.debug("assign " + parentIndex + possible[randIndex].op + "(" + possible[randIndex].left + ", " + right + ")");
+
         return true;
     }
 
@@ -119,13 +131,12 @@ function(Operation) {
     	var possible = [],
     		parent = nodes[parentIndex],
     		left = nodes[leftIndex],
-            right, op,
             randIndex;
 
-        if (parent - left > 0)
+        if (parent - left > 2)
         	possible.push({op: Operation.ADD(), right: parent - left});
 
-        if (left - parent > 0) 
+        if (left - parent > 2) 
         	possible.push({op: Operation.SUB(), right: left - parent});
 
         if (parent % left === 0) 
@@ -141,6 +152,8 @@ function(Operation) {
 
         nodes[rightIndex] = possible[randIndex].right;
         ops[parentIndex] = possible[randIndex].op;
+
+        // console.debug("assign " + parentIndex + possible[randIndex].op + "(" + left + ", " + possible[randIndex].right + ")");
 
         return true;
     }
