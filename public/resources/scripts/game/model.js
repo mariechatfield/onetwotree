@@ -26,9 +26,9 @@ function($, config, Puzzle, Operation) {
 			var isValid = this.puzzle.nodes[index].verify();
 
 			if (isValid)
-				this.points -= 10;
+				this.points -= 100;
 			else 
-				this.points -= 200;
+				this.points -= 500;
 
 			this.isWin = this.puzzle.isWin();
 			this.gameOver = this.isWin || this.points <= 0;

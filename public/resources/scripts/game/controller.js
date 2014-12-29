@@ -143,7 +143,7 @@ function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate,
                 // Decrement points on a timer
                 this.pointsTimer = setInterval(function () { 
 
-                    gameModel.points -= 1;
+                    gameModel.points -= 5;
                     if (gameModel.points <= 0) {
                         gameModel.gameOver = true;
                     }
