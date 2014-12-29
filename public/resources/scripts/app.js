@@ -49,8 +49,10 @@ var findBootstrapEnvironment = function findBootstrapEnvironment() {
 require([
     'config', 
     'game/controller', 
-    'game/dataStructures/operation'
-], function (config, GameController, Operation) {
+    'game/dataStructures/operation',
+    'hbs!/centarithmetic/public/resources/templates/inputValue',
+    'hbs!/centarithmetic/public/resources/templates/inputOp'
+], function (config, GameController, Operation, InputValueTemplate, InputOpTemplate) {
 
     // First, checks if it isn't implemented yet.
     if (!String.prototype.format) {
@@ -82,34 +84,6 @@ require([
     var reset = function () {
         game.reset();
     }
-
-    $('#timerOn').click(function () {
-        $('#timerOn').attr('class', 'btn btn-warning active');
-        $('#timerOff').attr('class', 'btn btn-warning');
-    });
-
-    $('#timerOff').click(function () {
-        $('#timerOn').attr('class', 'btn btn-warning');
-        $('#timerOff').attr('class', 'btn btn-warning active');
-    });
-
-    $('#easy').click(function () {
-        $('#easy').attr('class', 'btn btn-warning active');
-        $('#medium').attr('class', 'btn btn-warning');
-        $('#hard').attr('class', 'btn btn-warning');
-    });
-
-    $('#medium').click(function () {
-        $('#easy').attr('class', 'btn btn-warning');
-        $('#medium').attr('class', 'btn btn-warning active');
-        $('#hard').attr('class', 'btn btn-warning');
-    });
-
-    $('#hard').click(function () {
-        $('#easy').attr('class', 'btn btn-warning');
-        $('#medium').attr('class', 'btn btn-warning');
-        $('#hard').attr('class', 'btn btn-warning active');
-    });
 
     $('#start').click(function () {
         $('#workspace').show();

@@ -87,10 +87,10 @@ function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate,
     };
 
     function setListeners () {
-        $('.node:not(.final)')
+        $('.nodeBox .node:not(.final)')
         .click(clickNode);
 
-        $('.op:not(.final)')
+        $('.nodeBox .op:not(.final)')
         .click(clickOp);
 
         setAppListeners();

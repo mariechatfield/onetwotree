@@ -44,22 +44,108 @@ permalink: /index.html
 
                 <div id="newGameForm">
                     <h2 class="text-info">Start New Game</h2>
-                    <p><b> Combine numbers at the bottom of the tree to make the number at the top! </b></p>
+
                     <br>
+
+                    <div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <br>
+
+                                    <p><b>Combine numbers at the bottom of the tree to reach the numbers at the top.</b></p>
+
+                                    <br>
+
+                                    <div class="pull-left">
+
+                                        <span class="nodeBoxSample btn-group btn-group-vertical">
+                                            <button class="btn btn-default node">14</button>
+                                            <button class="btn btn-info op">x</button>
+                                        </span>
+
+                                        <br>
+
+                                        <span class="nodeBoxSample btn-group btn-group-vertical">
+                                            <button class="btn btn-default node" disabled="disabled">2</button>
+                                        </span>
+                                        <span class="nodeBoxSample btn-group btn-group-vertical">
+                                            <button class="btn btn-default node" disabled="disabled">7</button>
+                                        </span>
+
+                                    </div>
+
+                                    <p>Available operations are add, subtract, multiply and divide.</p>
+
+                                    <p>Operations are always evaluated left to right.</p>
+
+                                    <p>Incorrect calculations are marked in red.</p>
+
+                                    <br>
+
+                                    <div class="pull-right">
+
+                                        <span class="nodeBoxSample btn-group btn-group-vertical">
+                                            <button class="btn btn-danger node">16</button>
+                                            <button class="btn btn-info op">+</button>
+                                        </span>
+
+                                        <br>
+
+                                        <span class="nodeBoxSample btn-group btn-group-vertical">
+                                            <button class="btn btn-default node" disabled="disabled">2</button>
+                                        </span>
+                                        <span class="nodeBoxSample btn-group btn-group-vertical">
+                                            <button class="btn btn-default node" disabled="disabled">12</button>
+                                        </span>
+
+                                    </div>
+
+                                    <p><b>Points:</b></p>
+
+                                    <p>Every game starts out with 10,000 points.</p>
+
+                                    <p>Each move costs 100 points. Each incorrect calculation costs 500 points.</p>
+
+                                    <p>The game ends either when the entire board is filled correctly or the points run out.</p>
+
+                                    <p>For an additional challenge, turn on the timer!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="instructionsToggle" class="btn btn-primary" type="button" data-toggle="modal" data-target="#instructions" aria-expanded="false" aria-controls="instructions">Instructions</button>
+                    <br><br>
                     <div class="gameForm">
                         <h4>Timer</h4>
-                        <div id="inputTimer" class="btn-group">
-                            <button id="timerOn" class="btn btn-warning active">On</button>
-                            <button id="timerOff" class="btn btn-warning">Off</button>
+
+                        <div id="inputTimer" class="btn-group" data-toggle="buttons">
+                          <label id="timerOn" class="btn btn-warning active">
+                            <input type="radio" name="options" autocomplete="off"> On
+                          </label>
+                          <label id="timerOff" class="btn btn-warning">
+                            <input type="radio" name="options" autocomplete="off"> Off
+                          </label>
                         </div>
                     </div>
                     <br>
                     <div class="gameForm">
                         <h4>Difficulty</h4>
-                        <div id="inputDifficulty" class="btn-group">
-                            <button id="easy" class="btn btn-warning">Easy</button>
-                            <button id="medium" class="btn btn-warning active">Medium</button>
-                            <button id="hard" class="btn btn-warning">Hard</button>
+                        <div id="inputDifficulty" class="btn-group" data-toggle="buttons">
+                          <label id="easy" class="btn btn-warning">
+                            <input type="radio" name="options" autocomplete="off"> Easy
+                          </label>
+                          <label id="medium" class="btn btn-warning active">
+                            <input type="radio" name="options" autocomplete="off"> Medium
+                          </label>
+                          <label id="hard" class="btn btn-warning">
+                            <input type="radio" name="options" autocomplete="off"> Hard
+                          </label>
                         </div>
                     </div>
                     <br>
