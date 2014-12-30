@@ -50,7 +50,7 @@ require([
     'game/dataStructures/operation',
     'hbs!/onetwotree/public/resources/templates/inputValue',
     'hbs!/onetwotree/public/resources/templates/inputOp'
-], function (config, GameController, Operation, InputValueTemplate, InputOpTemplate) {
+], function (GameController, Operation, InputValueTemplate, InputOpTemplate) {
 
     // First, checks if it isn't implemented yet.
     if (!String.prototype.format) {

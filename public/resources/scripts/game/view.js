@@ -1,10 +1,9 @@
 define([
     'jquery',
-    'config',
     'hbs!/onetwotree/public/resources/templates/board',
     'hbs!/onetwotree/public/resources/templates/gameOver'
 ],
-function($, config, BoardTemplate, GameOverTemplate) {
+function($, BoardTemplate, GameOverTemplate) {
 
     'use strict';
 

@@ -1,10 +1,9 @@
 define([
     'jquery',
-    'config',
     'game/dataStructures/puzzle',
     'game/dataStructures/operation'
 ],
-function($, config, Puzzle, Operation) {
+function($, Puzzle, Operation) {
 
     'use strict';
 
