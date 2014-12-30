@@ -39,7 +39,7 @@ function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate,
         $('#inputValue').change(function(event) {
             var value = parseInt($('#inputValue').val());
 
-            if ((value > 0) && (value <= 100))
+            if ((value > 0))
                 playValue(index, value);        
         });
 

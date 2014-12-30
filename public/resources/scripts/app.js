@@ -118,7 +118,41 @@ require([
 
     });
 
+    $('#home').click(playNewGame);
+
     playNewGame();
+
+    var count = 0;
+
+    $('#sampleOp2').html('÷');
+
+    setInterval(function () {
+        switch (count++) {
+            case 0: {
+                $('#sampleOp1').html('x');
+               
+                $('#sampleNode3').html(9);
+                $('#sampleNode2').attr('class', 'btn btn-danger node');
+               break;
+            }
+
+            case 1: {
+                $('#sampleNode1').html(14);
+
+                $('#sampleNode3').html(8);
+                $('#sampleNode2').attr('class', 'btn btn-default node');
+                break;
+            }
+
+            case 2: {
+                $('#sampleNode1').html('');
+                $('#sampleOp1').html('');
+                $('#sampleNode3').html('');
+                count = 0;
+                break;
+            }
+        }
+    }, 1000);
 
 });
 

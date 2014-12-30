@@ -8,7 +8,7 @@ function($, config, Puzzle, Operation) {
 
     'use strict';
 
-    var MAX_POINTS = 100000;
+    var MAX_POINTS = 50000;
 
     return function GameModel (el, puzzleSpecs) {
 

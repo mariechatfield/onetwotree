@@ -60,3 +60,7 @@ body {
 .btn-primary,.btn-primary:hover,.btn-primary:focus,.btn-primary.focus,.btn-primary:active,.btn-primary.active {
   color: #fff;
 }
+
+#home {
+  cursor: pointer;
+}
