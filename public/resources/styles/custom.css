@@ -1,91 +1,74 @@
 body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-  font-family: 'Josefin Slab', serif;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    font-family: 'Josefin Slab', serif;
 }
-
 p {
-  font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
-
 .btn {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
-
 #divider {
-  border-bottom: 1px solid #0a1d29;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  width: 100%;
+    border-bottom: 1px solid #0a1d29;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
 }
-
 .nodeBoxSample {
-  width: 50px;
-  height: 70px;
+    width: 50px;
+    height: 70px;
 }
-
 .node {
-  height: 55%;
-  z-index: 1;
-  margin: 5%;
-  padding: 10%;
+    height: 55%;
+    z-index: 1;
+    margin: 5%;
+    padding: 10%;
 }
-
 .op {
-  height: 40%;
-  z-index: 2;
-  padding: 5%;
-  font-size: 2em;
-  line-height: 0.2em;
+    height: 40%;
+    z-index: 2;
+    padding: 5%;
+    font-size: 2em;
+    line-height: 0.2em;
 }
-
 #inputValue {
-  width: 95%;
-  height: 95%;
-  padding: 5px;
+    width: 95%;
+    height: 95%;
+    padding: 5px;
 }
-
 #inputOp {
-  width: 95%;
-  vertical-align: center;
+    width: 95%;
+    vertical-align: center;
 }
-
 #points {
-  float: right;
+    float: right;
 }
-
-.navbar .navbar-brand{
-  font-size: 150%;
+.navbar .navbar-brand {
+    font-size: 150%;
 }
-
-.navbar .navbar-brand:hover{
-  color: #73a3a2;
+.navbar .navbar-brand:hover {
+    color: #73a3a2;
 }
-
 #alert {
-  z-index: 3;
-  position: absolute;
-  top: 50px;
-  width: 100%;
+    z-index: 3;
+    position: absolute;
+    top: 50px;
+    width: 100%;
 }
-
 .gameOver {
-  opacity: 0.5;
+    opacity: 0.5;
 }
-
-.btn-primary,.btn-primary:hover,.btn-primary:focus,.btn-primary.focus,.btn-primary:active,.btn-primary.active,.close {
-  color: #fff;
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .close {
+    color: #fff;
 }
-
 #home {
-  cursor: pointer;
+    cursor: pointer;
 }
-
 .pull-left, .pull-right {
-  text-align: center;
-  margin: 5%;
+    text-align: center;
+    margin: 5%;
 }
-
 .modal-body {
-  text-align: left;
+    text-align: left;
 }

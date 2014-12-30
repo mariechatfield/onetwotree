@@ -1,91 +1,94 @@
 define([
-    'jquery'
-],
-function($) {
+
+], function () {
 
     'use strict';
 
-    function AOperation (symbolIn) {
-    	this.symbol = symbolIn;
-    	this.mutable = true;
-	};
+    function AOperation(symbolIn) {
+        this.symbol = symbolIn;
+        this.mutable = true;
+    }
 
-	AOperation.prototype.toString = function () {
-		return this.symbol;
-	}
+    AOperation.prototype.toString = function () {
+        return this.symbol;
+    };
 
-	AOperation.prototype.evaluate = function (x, y) {
-		return 0;
-	}
+    AOperation.prototype.evaluate = function () {
+        return 0;
+    };
 
-	function ADD () {
-		var op = new AOperation("+");
-		op.evaluate = function (x, y) {
-			if (x == 0 || y == 0)
-				return 0;
+    function ADD() {
+        var op = new AOperation('+');
+        op.evaluate = function (x, y) {
+            if (x === 0 || y === 0) {
+                return 0;
+            }
 
-			return x + y;
-		}
+            return x + y;
+        };
 
-		return op;
-	}
+        return op;
+    }
 
-	function SUB () {
-		var op = new AOperation("-");
-		op.evaluate = function (x, y) {
-			if (x == 0 || y == 0)
-				return 0;
+    function SUB() {
+        var op = new AOperation('-');
+        op.evaluate = function (x, y) {
+            if (x === 0 || y === 0) {
+                return 0;
+            }
 
-			if (x <= y)
-				return -1;
+            if (x <= y) {
+                return -1;
+            }
 
-			return x - y;
-		}
+            return x - y;
+        };
 
-		return op;
-	}	
-	
-	function MULT () {
-		var op = new AOperation("×");
-		op.evaluate = function (x, y) {
-			if (x == 0 || y == 0)
-				return 0;
+        return op;
+    }
 
-			return x * y;
-		}
+    function MULT() {
+        var op = new AOperation('×');
+        op.evaluate = function (x, y) {
+            if (x === 0 || y === 0) {
+                return 0;
+            }
 
-		return op;
-	}
+            return x * y;
+        };
 
-	function DIV () {
-		var op = new AOperation("÷");
-		op.evaluate = function (x, y) {
-			if (x == 0 || y == 0)
-				return 0;
+        return op;
+    }
 
-			if (x % y != 0)
-				return -1;
+    function DIV() {
+        var op = new AOperation('÷');
+        op.evaluate = function (x, y) {
+            if (x === 0 || y === 0) {
+                return 0;
+            }
 
-			return x / y;
-		}
+            if (x % y !== 0) {
+                return -1;
+            }
 
-		return op;
-	}
+            return x / y;
+        };
 
-	/* Finish initializing ANode with nullNode defaults */
+        return op;
+    }
 
-	var NULL = new AOperation("");
+    /* Finish initializing ANode with nullNode defaults */
 
-	/* Return object with helper functions */
+    var NULL = new AOperation('');
 
-	return {
-		ADD: ADD,
-		SUB: SUB,
-		MULT: MULT,
-		DIV: DIV,
-		NULL: NULL
-	}
+    /* Return object with helper functions */
+
+    return {
+        ADD: ADD,
+        SUB: SUB,
+        MULT: MULT,
+        DIV: DIV,
+        NULL: NULL
+    };
 
 });
-
-

@@ -6,77 +6,92 @@ define([
     'game/puzzleGenerator',
     'hbs!/onetwotree/public/resources/templates/inputValue',
     'hbs!/onetwotree/public/resources/templates/inputOp'
-],
-function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate, InputOpTemplate) {
+], function ($, GameModel, GameView, Operation, PuzzleGenerator,
+    _InputValueTemplate,
+    _InputOpTemplate) {
 
     'use strict';
 
     var gameModel, gameView, setAppListeners;
 
-    function clickNode (event) {
-        var index =  parseInt(event.target.id),
+    function clickNode(event) {
+        var index = parseInt(event.target.id),
             node = gameModel.puzzle.nodes[index];
 
-        $('#' + index + 'node').html(InputValueTemplate(node));
+        $('#' + index + 'node').html(_InputValueTemplate(node));
 
         $('#inputValue').focus();
 
-        $('#inputValue').keypress(function(event){
+        $('#inputValue').keypress(function () {
             var value = parseInt($('#inputValue').val()),
                 valid = false;
-            
+
             if ((value < 0) || (value > 100)) {
-                $('#inputForm').attr('class', 'form-group has-error');
-            } else if (value == 0) {
-                $('#inputForm').attr('class', 'form-group');   
+                $('#inputForm').attr('class',
+                    'form-group has-error');
+            } else if (value === 0) {
+                $('#inputForm').attr('class', 'form-group');
             } else {
                 valid = true;
-                $('#inputForm').attr('class', 'form-group has-success');
+                $('#inputForm').attr('class',
+                    'form-group has-success');
             }
-            
+
         });
 
-        $('#inputValue').change(function(event) {
+        $('#inputValue').change(function () {
             var value = parseInt($('#inputValue').val());
 
-            if ((value > 0))
-                playValue(index, value);        
+            if ((value > 0)) {
+                playValue(index, value);
+            }
         });
 
-    };
+    }
 
-    function clickOp (event) {
-        var index =  parseInt(event.target.id),
+    function clickOp(event) {
+        var index = parseInt(event.target.id),
             node = gameModel.puzzle.nodes[index];
-        
-        $('#' + index + 'op').html(InputOpTemplate(node));
+
+        $('#' + index + 'op').html(_InputOpTemplate(node));
 
         $('#inputOp').focus();
 
-        $('#inputOp').change(function (event) {
+        $('#inputOp').change(function () {
             var op;
 
             switch ($('#inputOp').val()) {
-                case 'add': op = Operation.ADD(); break;
-                case 'sub': op = Operation.SUB(); break;
-                case 'mult': op = Operation.MULT(); break;
-                case 'div': op = Operation.DIV(); break;
-                default: op = Operation.NULL;
+                case 'add':
+                    op = Operation.ADD();
+                    break;
+                case 'sub':
+                    op = Operation.SUB();
+                    break;
+                case 'mult':
+                    op = Operation.MULT();
+                    break;
+                case 'div':
+                    op = Operation.DIV();
+                    break;
+                default:
+                    op = Operation.NULL;
             }
 
-            if (index >= 0 && index < gameModel.puzzle.nodes.length)
+            if (index >= 0 && index < gameModel.puzzle.nodes
+                .length) {
                 playOp(index, op);
+            }
         });
 
-    };
+    }
 
     function playValue(index, value) {
         gameModel.playTurnValue(index, value);
         gameView.render();
 
         setListeners();
-        $('#input').empty();   
-    };
+        $('#input').empty();
+    }
 
     function playOp(index, op) {
         gameModel.playTurnOp(index, op);
@@ -84,14 +99,14 @@ function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate,
 
         setListeners();
         $('#input').empty();
-    };
+    }
 
-    function setListeners () {
+    function setListeners() {
         $('.nodeBox .node:not(.final)')
-        .click(clickNode);
+            .click(clickNode);
 
         $('.nodeBox .op:not(.final)')
-        .click(clickOp);
+            .click(clickOp);
 
         setAppListeners();
     }
@@ -104,16 +119,23 @@ function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate,
 
         this.init = function () {
 
-           var puzzleSpecs;
+            var puzzleSpecs;
 
-           switch (this.settings.difficulty) {
-                case 'Easy': puzzleSpecs = PuzzleGenerator.Easy(); break;
-                case 'Medium': puzzleSpecs = PuzzleGenerator.Medium(); break;
-                case 'Hard': puzzleSpecs = PuzzleGenerator.Hard(); break;
-           }
+            switch (this.settings.difficulty) {
+                case 'Easy':
+                    puzzleSpecs = PuzzleGenerator.Easy();
+                    break;
+                case 'Medium':
+                    puzzleSpecs = PuzzleGenerator.Medium();
+                    break;
+                case 'Hard':
+                    puzzleSpecs = PuzzleGenerator.Hard();
+                    break;
+            }
 
             gameModel = new GameModel('#workspace', puzzleSpecs);
-            gameView = new GameView('#workspace', gameModel, this);
+            gameView = new GameView('#workspace', gameModel,
+                this);
 
             this.startGame();
         };
@@ -127,7 +149,7 @@ function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate,
         this.cancel = function () {
             clearInterval(this.pointsTimer);
             gameModel.points = 0;
-        }
+        };
 
         this.startGame = function () {
             var that = this;
@@ -136,20 +158,19 @@ function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate,
 
             setListeners();
 
-            this.pointsTimer;
-
             if (settings.timer) {
 
                 // Decrement points on a timer
-                this.pointsTimer = setInterval(function () { 
+                this.pointsTimer = setInterval(function () {
 
                     gameModel.points -= 5;
                     if (gameModel.points <= 0) {
                         gameModel.gameOver = true;
                     }
 
-                    if (gameModel.gameOver)
+                    if (gameModel.gameOver) {
                         clearInterval(that.pointsTimer);
+                    }
 
                     gameView.renderPoints();
 
