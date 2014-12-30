@@ -1,12 +1,15 @@
-@font-face {
-  font-family: SimplePrint;
-  font-size: larger;
-  src: url("/public/resources/fonts/SimplePrint.ttf");
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  font-family: 'Josefin Slab', serif;
 }
 
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.btn {
+  font-size: 1.5em;
 }
 
 #divider {
@@ -32,6 +35,8 @@ body {
   height: 40%;
   z-index: 2;
   padding: 5%;
+  font-size: 2em;
+  line-height: 0.2em;
 }
 
 #inputValue {
@@ -49,6 +54,10 @@ body {
   float: right;
 }
 
+.navbar .navbar-brand{
+  font-size: 150%;
+}
+
 .navbar .navbar-brand:hover{
   color: #73a3a2;
 }
@@ -64,10 +73,19 @@ body {
   opacity: 0.5;
 }
 
-.btn-primary,.btn-primary:hover,.btn-primary:focus,.btn-primary.focus,.btn-primary:active,.btn-primary.active {
+.btn-primary,.btn-primary:hover,.btn-primary:focus,.btn-primary.focus,.btn-primary:active,.btn-primary.active,.close {
   color: #fff;
 }
 
 #home {
   cursor: pointer;
+}
+
+.pull-left, .pull-right {
+  text-align: center;
+  margin: 5%;
+}
+
+.modal-body {
+  text-align: left;
 }

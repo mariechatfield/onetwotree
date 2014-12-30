@@ -129,7 +129,7 @@ require([
     setInterval(function () {
         switch (count++) {
             case 0: {
-                $('#sampleOp1').html('x');
+                $('#sampleOp1').html('×');
                
                 $('#sampleNode3').html(9);
                 $('#sampleNode2').attr('class', 'btn btn-danger node');
