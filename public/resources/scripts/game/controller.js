@@ -4,8 +4,8 @@ define([
     'game/view',
     'game/dataStructures/operation',
     'game/puzzleGenerator',
-    'hbs!/centarithmetic/public/resources/templates/inputValue',
-    'hbs!/centarithmetic/public/resources/templates/inputOp'
+    'hbs!/onetwotree/public/resources/templates/inputValue',
+    'hbs!/onetwotree/public/resources/templates/inputOp'
 ],
 function($, GameModel, GameView, Operation, PuzzleGenerator, InputValueTemplate, InputOpTemplate) {
 

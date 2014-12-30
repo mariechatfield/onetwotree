@@ -4,12 +4,11 @@ require.config({
             deps: ['jquery']
         }
     },
-    baseUrl: '/centarithmetic/public/resources/scripts',
+    baseUrl: '/onetwotree/public/resources/scripts',
     paths: {
-        'bootstrap': '/centarithmetic/public/vendor/bootstrap.min',
-        'jquery': '/centarithmetic/public/vendor/jquery.min',
-        'hbs': '/centarithmetic/public/vendor/require-handlebars-plugin/hbs',
-        'config': 'app.config'
+        'bootstrap': '/onetwotree/public/vendor/bootstrap.min',
+        'jquery': '/onetwotree/public/vendor/jquery.min',
+        'hbs': '/onetwotree/public/vendor/require-handlebars-plugin/hbs'
     }
 });
 
@@ -47,11 +46,10 @@ var findBootstrapEnvironment = function findBootstrapEnvironment() {
 
 // Initialize Backbone Router
 require([
-    'config', 
     'game/controller', 
     'game/dataStructures/operation',
-    'hbs!/centarithmetic/public/resources/templates/inputValue',
-    'hbs!/centarithmetic/public/resources/templates/inputOp'
+    'hbs!/onetwotree/public/resources/templates/inputValue',
+    'hbs!/onetwotree/public/resources/templates/inputOp'
 ], function (config, GameController, Operation, InputValueTemplate, InputOpTemplate) {
 
     // First, checks if it isn't implemented yet.

@@ -1,8 +1,8 @@
 define([
     'jquery',
     'config',
-    'hbs!/centarithmetic/public/resources/templates/board',
-    'hbs!/centarithmetic/public/resources/templates/gameOver'
+    'hbs!/onetwotree/public/resources/templates/board',
+    'hbs!/onetwotree/public/resources/templates/gameOver'
 ],
 function($, config, BoardTemplate, GameOverTemplate) {
 
