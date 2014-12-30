@@ -12,111 +12,130 @@ define([
 
     'use strict';
 
-    var gameModel, gameView, setAppListeners;
-
-    function clickNode(event) {
-        var index = parseInt(event.target.id),
-            node = gameModel.puzzle.nodes[index];
-
-        $('#' + index + 'node').html(_InputValueTemplate(node));
-
-        $('#inputValue').focus();
-
-        $('#inputValue').keypress(function () {
-            var value = parseInt($('#inputValue').val()),
-                valid = false;
-
-            if ((value < 0) || (value > 100)) {
-                $('#inputForm').attr('class',
-                    'form-group has-error');
-            } else if (value === 0) {
-                $('#inputForm').attr('class', 'form-group');
-            } else {
-                valid = true;
-                $('#inputForm').attr('class',
-                    'form-group has-success');
-            }
-
-        });
-
-        $('#inputValue').change(function () {
-            var value = parseInt($('#inputValue').val());
-
-            if ((value > 0)) {
-                playValue(index, value);
-            }
-        });
-
-    }
-
-    function clickOp(event) {
-        var index = parseInt(event.target.id),
-            node = gameModel.puzzle.nodes[index];
-
-        $('#' + index + 'op').html(_InputOpTemplate(node));
-
-        $('#inputOp').focus();
-
-        $('#inputOp').change(function () {
-            var op;
-
-            switch ($('#inputOp').val()) {
-                case 'add':
-                    op = Operation.ADD();
-                    break;
-                case 'sub':
-                    op = Operation.SUB();
-                    break;
-                case 'mult':
-                    op = Operation.MULT();
-                    break;
-                case 'div':
-                    op = Operation.DIV();
-                    break;
-                default:
-                    op = Operation.NULL;
-            }
-
-            if (index >= 0 && index < gameModel.puzzle.nodes
-                .length) {
-                playOp(index, op);
-            }
-        });
-
-    }
-
-    function playValue(index, value) {
-        gameModel.playTurnValue(index, value);
-        gameView.render();
-
-        setListeners();
-        $('#input').empty();
-    }
-
-    function playOp(index, op) {
-        gameModel.playTurnOp(index, op);
-        gameView.render();
-
-        setListeners();
-        $('#input').empty();
-    }
+    var model, /* The model for the game. */
+        view, /* The view for the game. */
+        setAppListeners; /* Function to set any application-wide listeners. */
 
     function setListeners() {
-        $('.nodeBox .node:not(.final)')
-            .click(clickNode);
 
-        $('.nodeBox .op:not(.final)')
-            .click(clickOp);
+        /* Set listener on nodes. */
+        $('.nodeBox .node').click(function (event) {
+            var index = parseInt(event.target.id),
+                node = model.puzzle.nodes[index],
+                nodeStr = '#' + index + 'node';
+
+            /* Remove any exisiting forms. */
+            $('#inputForm').remove();
+
+            /* Inject HTML for this form into node. */
+            $(nodeStr).html(_InputValueTemplate(node));
+            $('#inputValue').focus();
+
+            /* Display validation feedback as user types input. */
+            $('#inputValue').keypress(function () {
+                var value,
+                    valid = false;
+
+                value = parseInt($('#inputValue').val());
+
+                if ((value < 0) || (value > 100)) {
+                    $('#inputForm').attr('class',
+                        'form-group has-error');
+                } else if (value === 0) {
+                    $('#inputForm').attr('class',
+                        'form-group');
+                } else {
+                    valid = true;
+                    $('#inputForm').attr('class',
+                        'form-group has-success'
+                    );
+                }
+
+            });
+
+            /* Parse input and process if valid. */
+            $('#inputValue').change(function () {
+                var value;
+
+                value = parseInt($('#inputValue').val());
+
+                if (value > 0) {
+                    model.playTurnNode(index, value);
+                    view.render();
+                    setListeners();
+                }
+            });
+
+        });
+
+        /* Set listener on operations. */
+        $('.nodeBox .op').click(function (event) {
+            var index = parseInt(event.target.id),
+                allNodes = model.puzzle.nodes,
+                node = allNodes[index],
+                opStr = '#' + index + 'op';
+
+            /* Only process if operation div itself is clicked, not children. */
+            if (event.target !== this) {
+                return;
+            }
+
+            /* Remove any existing forms. */
+            $('#inputForm').remove();
+
+            /* Inject HTML for this form into operation. */
+            $(opStr).html(_InputOpTemplate(node));
+            $('#inputOp').focus();
+
+            /* Parse input and process. */
+            $('#inputOp').change(function () {
+                var op;
+
+                switch ($('#inputOp').val()) {
+                    case 'add':
+                        op = Operation.ADD();
+                        break;
+                    case 'sub':
+                        op = Operation.SUB();
+                        break;
+                    case 'mult':
+                        op = Operation.MULT();
+                        break;
+                    case 'div':
+                        op = Operation.DIV();
+                        break;
+                    default:
+                        op = Operation.NULL;
+                }
+
+                if (index >= 0 && index < allNodes.length) {
+                    model.playTurnOp(index, op);
+                    view.render();
+                    setListeners();
+                }
+            });
+
+        });
 
         setAppListeners();
     }
 
+    /**
+     * Constructor for the controller for the game MVC.
+     * @param {{timer: boolean,
+                    difficulty: string,
+                    setAppListeners: function}} 
+                settings - the user-selected settings for the game
+     */
     return function GameController(settings) {
 
         this.settings = settings;
 
         setAppListeners = settings.setAppListeners;
 
+        /**
+         * Initialize the game controller with a new puzzle, model, and view.
+         */
         this.init = function () {
 
             var puzzleSpecs;
@@ -133,46 +152,59 @@ define([
                     break;
             }
 
-            gameModel = new GameModel('#workspace', puzzleSpecs);
-            gameView = new GameView('#workspace', gameModel,
-                this);
+            model = new GameModel(puzzleSpecs);
+            view = new GameView('#workspace', model);
 
             this.startGame();
         };
 
+        /**
+         * Reset the game board to its initial state.
+         */
         this.reset = function () {
             this.cancel();
-            gameModel.reset();
+            model.reset();
             this.startGame();
         };
 
+        /**
+         * Cancel this game.
+         */
         this.cancel = function () {
             clearInterval(this.pointsTimer);
-            gameModel.points = 0;
         };
 
+        /**
+         * Start the game.
+         */
         this.startGame = function () {
             var that = this;
 
-            gameView.render();
-
+            view.render();
             setListeners();
 
+            /* Start the game timer if applicable. */
             if (settings.timer) {
 
-                // Decrement points on a timer
                 this.pointsTimer = setInterval(function () {
 
-                    gameModel.points -= 5;
-                    if (gameModel.points <= 0) {
-                        gameModel.gameOver = true;
+                    model.points -= 5;
+
+                    /* Game is over if points have run out. */
+                    if (model.points <= 0) {
+                        model.gameOver = true;
                     }
 
-                    if (gameModel.gameOver) {
+                    /* 
+                     * If game is over (because points have run out or because
+                     * game is in winning state), stop the timer.
+                     */
+                    if (model.gameOver) {
                         clearInterval(that.pointsTimer);
                     }
 
-                    gameView.renderPoints();
+                    /* Update the points display. */
+                    view.renderPoints();
 
                 }, 400);
 

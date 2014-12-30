@@ -14,7 +14,6 @@ require.config({
 
 /**
  * Initialize Bootstrap's js components
- * TODO; determine why shim deps doesn't always resolve jquery first
  */
 require(['jquery'], function () {
     'use strict';
@@ -22,16 +21,13 @@ require(['jquery'], function () {
     require(['bootstrap']);
 });
 
-// Initialize Backbone Router
-require([
-    'jquery',
-    'game/controller',
-    'hbs!/onetwotree/public/resources/templates/modal'
-], function ($, GameController, _ModalTemplate) {
-
+/**
+ * Set up any global utility methods that will be used in the application.
+ */
+function setUpUtilities() {
     'use strict';
 
-    // First, checks if it isn't implemented yet.
+    // String format, from http://stackoverflow.com/a/4673436
     if (!String.prototype.format) {
         String.prototype.format = function () {
             var args = arguments;
@@ -41,11 +37,78 @@ require([
             });
         };
     }
+}
 
+/**
+ * Inject modal HTML and set up animation.
+ * @param {function} $ - JQuery
+ * @param {function} _ModalTemplate - Compiled Handlebars template for the modal
+ */
+function setUpInstructionsModal($, _ModalTemplate) {
+
+    'use strict';
+
+    /* Inject the modal HTML from Handlebars template into div. */
     $('#instructions').html(_ModalTemplate());
+
+    /* Set operation character - displays incorrectly otherwise. */
+    $('#sampleOp2').html('÷');
+
+    /* Start the animation timer. */
+
+    var count = 0;
+
+    setInterval(function () {
+        switch (count++) {
+            case 0:
+                {
+                    /* Beat 1 */
+                    $('#sampleOp1').html('×');
+
+                    $('#sampleNode3').html(9);
+                    $('#sampleNode2').attr('class',
+                        'btn btn-danger node');
+                    break;
+                }
+
+            case 1:
+                {
+                    /* Beat 2 */
+                    $('#sampleNode1').html(14);
+
+                    $('#sampleNode3').html(8);
+                    $('#sampleNode2').attr('class',
+                        'btn btn-default node');
+                    break;
+                }
+
+            case 2:
+                {
+                    /* Beat 3 (and reset) */
+                    $('#sampleNode1').html('');
+                    $('#sampleOp1').html('');
+                    $('#sampleNode3').html('');
+                    count = 0;
+                    break;
+                }
+        }
+    }, 1000);
+
+}
+
+/**
+ * Attach listeners to buttons to start or reset game and open initial view.
+ * @param {function} GameController - constructor for GameController
+ */
+function setUpGame(GameController) {
+
+    'use strict';
 
     var game;
 
+    /**
+     * Display the play new game dialog.
+     */
     var playNewGame = function () {
 
         if (game) {
@@ -59,22 +122,26 @@ require([
         $('#newGameForm').show();
     };
 
-    var reset = function () {
-        game.reset();
-    };
+    /* Set up listener on game title. */
+    $('#home').click(playNewGame);
 
+    /**
+     * Start a new game using the settings from the play new game dialog.
+     */
     $('#start').click(function () {
+        var isTimer, difficulty;
+
         $('#workspace').show();
         $('#newGameForm').hide();
 
-        var isTimer, difficulty;
-
+        /* Get timer on/off setting. */
         if ($('#timerOn').hasClass('btn btn-warning active')) {
             isTimer = true;
         } else {
             isTimer = false;
         }
 
+        /* Get difficulty setting. */
         if ($('#easy').hasClass('btn btn-warning active')) {
             difficulty = 'Easy';
         } else if ($('#medium').hasClass(
@@ -84,60 +151,48 @@ require([
             difficulty = 'Hard';
         }
 
-
+        /**
+         * Attach appplication-wide listeners.
+         */
         function setAppListeners() {
-            $('#reset').click(reset);
+            $('#reset').click(function () {
+                game.reset();
+            });
+
             $('#playNew').click(playNewGame);
         }
 
+        /* Initialize game controller and start game. */
         game = new GameController({
             timer: isTimer,
             difficulty: difficulty,
             setAppListeners: setAppListeners
         });
+
         game.init();
 
     });
 
-    $('#home').click(playNewGame);
-
+    /* Display the play new game dialog when page first loads. */
     playNewGame();
 
-    var count = 0;
+}
 
-    $('#sampleOp2').html('÷');
+/**
+ * Initialize game environment and start the application.
+ */
+require([
+    'jquery',
+    'game/controller',
+    'hbs!/onetwotree/public/resources/templates/modal'
+], function ($, GameController, _ModalTemplate) {
 
-    setInterval(function () {
-        switch (count++) {
-            case 0:
-                {
-                    $('#sampleOp1').html('×');
+    'use strict';
 
-                    $('#sampleNode3').html(9);
-                    $('#sampleNode2').attr('class',
-                        'btn btn-danger node');
-                    break;
-                }
+    setUpUtilities();
 
-            case 1:
-                {
-                    $('#sampleNode1').html(14);
+    setUpInstructionsModal($, _ModalTemplate);
 
-                    $('#sampleNode3').html(8);
-                    $('#sampleNode2').attr('class',
-                        'btn btn-default node');
-                    break;
-                }
-
-            case 2:
-                {
-                    $('#sampleNode1').html('');
-                    $('#sampleOp1').html('');
-                    $('#sampleNode3').html('');
-                    count = 0;
-                    break;
-                }
-        }
-    }, 1000);
+    setUpGame(GameController);
 
 });

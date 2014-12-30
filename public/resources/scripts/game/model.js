@@ -5,21 +5,40 @@ define([
 
     'use strict';
 
+    /* The amount of points with which each game starts. */
     var MAX_POINTS = 50000;
 
-    return function GameModel(el, puzzleSpecs) {
+    /**
+     * Constructor for the model of the game MVC.
+     * @param {{initValues: number[],
+     *              initOps: AOperation[]}}
+     *        puzzleSpecs - the initial state of this game's puzzle
+     */
+    return function GameModel(puzzleSpecs) {
 
+        /** @type {{initValues: number[],
+         *              initOps: AOperation[]}}
+         *        puzzleSpecs - the initial state of this game's puzzle
+         */
         this.puzzleSpecs = puzzleSpecs;
 
+        /** @type {Puzzle} puzzle - this game's puzzle */
         this.puzzle = new Puzzle(this.puzzleSpecs);
 
+        /** @type {number} points - the current number of points remaining */
         this.points = MAX_POINTS;
 
+        /** @type {Boolean} gameOver - true if game is over, false otherwise */
         this.gameOver = false;
 
+        /** @type {Boolean} isWin - true if winning state, false otherwise */
         this.isWin = false;
 
-        this.playTurn = function (index) {
+        /**
+         * Updates the model's state after a turn is played.
+         * @param  {number} index - the index of the node which was changed
+         */
+        this.updateState = function (index) {
             var isValid = this.puzzle.nodes[index].verify();
 
             if (isValid) {
@@ -32,18 +51,31 @@ define([
             this.gameOver = this.isWin || this.points <= 0;
         };
 
-        this.playTurnValue = function (index, value) {
+        /**
+         * Play a turn in which a given node's value is set.
+         * @param  {number} index - the index of the node
+         * @param  {number} value - the value to assign the node
+         */
+        this.playTurnNode = function (index, value) {
             this.puzzle.nodes[index].value = value;
 
-            this.playTurn(index);
+            this.updateState(index);
         };
 
+        /**
+         * Play a turn in which a given node's operation is set.
+         * @param  {number} index - the index of the node
+         * @param  {AOperation} op - the operation to assign the node
+         */
         this.playTurnOp = function (index, op) {
             this.puzzle.nodes[index].op = op;
 
-            this.playTurn(index);
+            this.updateState(index);
         };
 
+        /**
+         * Reset the game to its initial state.
+         */
         this.reset = function () {
             this.puzzle = new Puzzle(this.puzzleSpecs);
             this.points = MAX_POINTS;

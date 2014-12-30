@@ -6,20 +6,33 @@ define([
 
     'use strict';
 
+    /**
+     * Constructor for a puzzle.
+     * @param {{initValues: number[],
+     *              initOps: AOperation[]}}
+     *          specs - Specifications for the initial state
+     */
     function Puzzle(specs) {
 
+        /** @type {number[]} initValues - Initial values of nodes */
         this.initValues = specs.initValues;
 
+        /** @type {AOperation[]} initOps - Initial operations of nodes */
         this.initOps = specs.initOps;
 
-        this.numNodes = specs.numNodes;
+        /** @type {number} numNodes - The total number of nodes in the puzzle */
+        this.numNodes = this.initValues.length;
 
+        /** @type {ANode[]} nodes - The nodes which comprise this puzzle */
         this.nodes = [];
 
         this.init();
 
     }
 
+    /**
+     * Initialize the puzzle using the pre-defined specifications.
+     */
     Puzzle.prototype.init = function () {
         var i;
 
@@ -29,73 +42,73 @@ define([
         }
 
         /* Set up empty nodes with correct edges. */
-
         if (this.numNodes === 21) {
-            /* Row 6 */
-            this.nodes[20] = Node.makeUnary(0);
-            this.nodes[19] = Node.makeUnary(0);
-            this.nodes[18] = Node.makeUnary(0);
-            this.nodes[17] = Node.makeUnary(0);
-            this.nodes[16] = Node.makeUnary(0);
-            this.nodes[15] = Node.makeUnary(0);
+            /* Row 6 of 6 */
+            this.nodes[20] = Node.makeLeaf(0);
+            this.nodes[19] = Node.makeLeaf(0);
+            this.nodes[18] = Node.makeLeaf(0);
+            this.nodes[17] = Node.makeLeaf(0);
+            this.nodes[16] = Node.makeLeaf(0);
+            this.nodes[15] = Node.makeLeaf(0);
 
-            /* Row 5 */
-            this.nodes[14] = Node.makeBinary(0, this.nodes[19],
+            /* Row 5 of 6 */
+            this.nodes[14] = Node.makeInternal(0, this.nodes[19],
                 this.nodes[20]);
-            this.nodes[13] = Node.makeBinary(0, this.nodes[18],
+            this.nodes[13] = Node.makeInternal(0, this.nodes[18],
                 this.nodes[19]);
-            this.nodes[12] = Node.makeBinary(0, this.nodes[17],
+            this.nodes[12] = Node.makeInternal(0, this.nodes[17],
                 this.nodes[18]);
-            this.nodes[11] = Node.makeBinary(0, this.nodes[16],
+            this.nodes[11] = Node.makeInternal(0, this.nodes[16],
                 this.nodes[17]);
-            this.nodes[10] = Node.makeBinary(0, this.nodes[15],
+            this.nodes[10] = Node.makeInternal(0, this.nodes[15],
                 this.nodes[16]);
 
         } else if (this.numNodes === 15) {
-            /* Row 5 */
-            this.nodes[14] = Node.makeUnary(0);
-            this.nodes[13] = Node.makeUnary(0);
-            this.nodes[12] = Node.makeUnary(0);
-            this.nodes[11] = Node.makeUnary(0);
-            this.nodes[10] = Node.makeUnary(0);
+            /* Row 5 of 5 */
+            this.nodes[14] = Node.makeLeaf(0);
+            this.nodes[13] = Node.makeLeaf(0);
+            this.nodes[12] = Node.makeLeaf(0);
+            this.nodes[11] = Node.makeLeaf(0);
+            this.nodes[10] = Node.makeLeaf(0);
         }
 
         if (this.numNodes > 10) {
-            /* Row 4 */
-            this.nodes[9] = Node.makeBinary(0, this.nodes[13], this
-                .nodes[14]);
-            this.nodes[8] = Node.makeBinary(0, this.nodes[12], this
-                .nodes[13]);
-            this.nodes[7] = Node.makeBinary(0, this.nodes[11], this
-                .nodes[12]);
-            this.nodes[6] = Node.makeBinary(0, this.nodes[10], this
-                .nodes[11]);
+            /* Row 4 of [5, 6] */
+            this.nodes[9] = Node.makeInternal(0, this.nodes[13],
+                this.nodes[14]);
+            this.nodes[8] = Node.makeInternal(0, this.nodes[12],
+                this.nodes[13]);
+            this.nodes[7] = Node.makeInternal(0, this.nodes[11],
+                this.nodes[12]);
+            this.nodes[6] = Node.makeInternal(0, this.nodes[10],
+                this.nodes[11]);
         } else {
-            /* Row 3 */
-            this.nodes[9] = Node.makeUnary(0);
-            this.nodes[8] = Node.makeUnary(0);
-            this.nodes[7] = Node.makeUnary(0);
-            this.nodes[6] = Node.makeUnary(0);
+            /* Row 4 of 4 */
+            this.nodes[9] = Node.makeLeaf(0);
+            this.nodes[8] = Node.makeLeaf(0);
+            this.nodes[7] = Node.makeLeaf(0);
+            this.nodes[6] = Node.makeLeaf(0);
         }
 
         /* Row 3 */
-        this.nodes[5] = Node.makeBinary(0, this.nodes[8], this.nodes[
+        this.nodes[5] = Node.makeInternal(0, this.nodes[8], this.nodes[
             9]);
-        this.nodes[4] = Node.makeBinary(0, this.nodes[7], this.nodes[
+        this.nodes[4] = Node.makeInternal(0, this.nodes[7], this.nodes[
             8]);
-        this.nodes[3] = Node.makeBinary(0, this.nodes[6], this.nodes[
+        this.nodes[3] = Node.makeInternal(0, this.nodes[6], this.nodes[
             7]);
 
         /* Row 2 */
-        this.nodes[2] = Node.makeBinary(0, this.nodes[4], this.nodes[
+        this.nodes[2] = Node.makeInternal(0, this.nodes[4], this.nodes[
             5]);
-        this.nodes[1] = Node.makeBinary(0, this.nodes[3], this.nodes[
+        this.nodes[1] = Node.makeInternal(0, this.nodes[3], this.nodes[
             4]);
 
         /* Row 1 */
-        this.nodes[0] = Node.makeBinary(0, this.nodes[1], this.nodes[
+        this.nodes[0] = Node.makeInternal(0, this.nodes[1], this.nodes[
             2]);
 
+        /* Initialize nodes with initial values. */
         for (i = 0; i < this.initValues.length; i++) {
             if (this.initValues[i] !== 0) {
                 this.nodes[i].value = this.initValues[i];
@@ -103,38 +116,45 @@ define([
             }
         }
 
+        /* Initialize operations with initial values. */
         for (i = 0; i < this.initOps.length; i++) {
-            if (this.initOps[i] !== 0) {
+            if (this.initOps[i] !== Operation.NULL) {
                 this.nodes[i].op = this.initOps[i];
                 this.nodes[i].op.mutable = false;
             }
         }
     };
 
+    /**
+     * Determine if the puzzle is in a winning state.
+     * @return {Boolean} true if winning state, false otherwise
+     */
     Puzzle.prototype.isWin = function () {
 
         var i;
 
-        for (i = this.numNodes - 1; i >= 0; i--) {
+        /* Check each node in the puzzle. */
+        for (i = 0; i < this.numNodes; i++) {
             var node = this.nodes[i];
 
-            /* Check if node's value has been set */
+            /* If node's value has not been set, puzzle is incomplete. */
             if (node.value === 0) {
                 return false;
             }
 
-            /* Check if node's operation has been set */
+            /* If node's operation has not been set, puzzle is incomplete. */
             if (node.op !== undefined && node.op === Operation.NULL) {
                 return false;
             }
 
-            /* Check that node is valid */
+            /* If node has an invalid value, the puzzle is incorrect. */
             if (!node.verify()) {
                 return false;
             }
 
         }
 
+        /* Puzzle is completely and correctly filled. */
         return true;
     };
 
