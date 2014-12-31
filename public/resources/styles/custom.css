@@ -4,7 +4,7 @@ body {
     font-family: 'Josefin Slab', serif;
 }
 p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto Slab', serif;
 }
 .btn {
     font-size: 1.5em;
@@ -14,6 +14,13 @@ p {
     margin-top: 50px;
     margin-bottom: 50px;
     width: 100%;
+}
+.myModalFooter {
+    width: 100%;
+    border-top: 1px solid #0a1d29;
+    padding-top: 15px;
+    margin-top: 20px;
+    text-align: right;
 }
 .nodeBoxSample {
     width: 50px;
