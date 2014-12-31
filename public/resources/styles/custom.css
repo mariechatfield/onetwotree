@@ -36,6 +36,8 @@ p {
     width: 95%;
     height: 95%;
     padding: 5px;
+    font-size: 1em;
+    text-align: center;
 }
 #inputOp {
     width: 95%;
