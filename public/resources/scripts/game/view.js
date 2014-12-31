@@ -76,6 +76,8 @@ define([
             }
 
             setNodeBoxSize();
+
+            window.scrollTo(0, 0);
         };
 
         /**
