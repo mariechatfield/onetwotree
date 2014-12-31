@@ -54,8 +54,7 @@ p {
 #alert {
     z-index: 3;
     position: absolute;
-    top: 50px;
-    width: 100%;
+    top: 75px;
 }
 .gameOver {
     opacity: 0.5;

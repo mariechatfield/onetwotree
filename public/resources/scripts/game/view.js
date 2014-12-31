@@ -23,6 +23,9 @@ define([
             'width': maxWidth + 'px',
             'height': maxHeight + 'px'
         });
+
+        /* Adjust alert size as well. */
+        $('#alert').css('width', $('#workspace').width());
     }
 
     /*
