@@ -6,7 +6,7 @@ define([
     'use strict';
 
     /* The amount of points with which each game starts. */
-    var MAX_POINTS = 50000;
+    var MAX_POINTS = 20000;
 
     /**
      * Constructor for the model of the game MVC.
