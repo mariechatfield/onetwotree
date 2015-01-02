@@ -1,6 +1,6 @@
 define([
-
-], function () {
+    'app.config'
+], function (Config) {
 
     'use strict';
 
@@ -31,7 +31,7 @@ define([
      */
     function ADD() {
 
-        var op = new AOperation('+');
+        var op = new AOperation(Config.addSymbol);
         op.evaluate = function (x, y) {
             if (x === 0 || y === 0) {
                 return 0;
@@ -49,7 +49,7 @@ define([
      */
     function SUB() {
 
-        var op = new AOperation('-');
+        var op = new AOperation(Config.subSymbol);
         op.evaluate = function (x, y) {
             if (x === 0 || y === 0) {
                 return 0;
@@ -71,7 +71,7 @@ define([
      */
     function MULT() {
 
-        var op = new AOperation('×');
+        var op = new AOperation(Config.multSymbol);
         op.evaluate = function (x, y) {
             if (x === 0 || y === 0) {
                 return 0;
@@ -89,7 +89,7 @@ define([
      */
     function DIV() {
 
-        var op = new AOperation('÷');
+        var op = new AOperation(Config.divSymbol);
         op.evaluate = function (x, y) {
             if (x === 0 || y === 0) {
                 return 0;

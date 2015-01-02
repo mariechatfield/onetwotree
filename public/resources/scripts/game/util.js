@@ -1,6 +1,7 @@
 define([
-    'game/dataStructures/operation'
-], function (Operation) {
+    'game/dataStructures/operation',
+    'app.config'
+], function (Operation, Config) {
 
     'use strict';
 
@@ -85,7 +86,7 @@ define([
         op = possible[randIndex];
 
         switch (op.symbol) {
-            case '+':
+            case Config.addSymbol:
                 {
                     /* 
                      * Chose a factor of parent if possible. This allows
@@ -101,14 +102,14 @@ define([
                     right = parent - left;
                     break;
                 }
-            case '-':
+            case Config.subSymbol:
                 {
                     left = Math.floor(Math.random() * (100 - parent +
                         1)) + parent;
                     right = left - parent;
                     break;
                 }
-            case '×':
+            case Config.multSymbol:
                 {
                     randIndex = Math.floor(Math.random() *
                         (factors[parent].length - 1));
@@ -116,7 +117,7 @@ define([
                     right = parent / left;
                     break;
                 }
-            case '÷':
+            case Config.divSymbol:
                 {
                     randIndex = Math.floor(Math.random() *
                         (multiples[parent].length - 1));

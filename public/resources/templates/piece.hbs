@@ -17,10 +17,10 @@
 	<select id="{{index}}op" class="form-control op"
 	{{#unless node.op.mutable}}disabled="disabled"{{/unless}}>
 		<option value=""></option>
-        <option value="+">+</option>
-        <option value="-">-</option>
-        <option value="×">×</option>
-        <option value="÷">÷</option>
+        <option value="{{Config.addSymbol}}">{{Config.addSymbol}}</option>
+        <option value="{{Config.subSymbol}}">{{Config.subSymbol}}</option>
+        <option value="{{Config.multSymbol}}">{{Config.multSymbol}}</option>
+        <option value="{{Config.divSymbol}}">{{Config.divSymbol}}</option>
 	</select>
 	{{/if}}
 </span>

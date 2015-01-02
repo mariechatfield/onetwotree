@@ -44,7 +44,7 @@ function setUpUtilities() {
  * @param {function} $ - JQuery
  * @param {function} _ModalTemplate - Compiled Handlebars template for the modal
  */
-function setUpInstructionsModal($, _ModalTemplate) {
+function setUpInstructionsModal($, _ModalTemplate, Config) {
 
     'use strict';
 
@@ -52,7 +52,7 @@ function setUpInstructionsModal($, _ModalTemplate) {
     $('#instructions').html(_ModalTemplate());
 
     /* Set operation character - displays incorrectly otherwise. */
-    $('#sampleOp2').html('÷');
+    $('#sampleOp2').html(Config.divSymbol);
 
     /* Start the animation timer. */
 
@@ -63,7 +63,7 @@ function setUpInstructionsModal($, _ModalTemplate) {
             case 0:
                 {
                     /* Beat 1 */
-                    $('#sampleOp1').html('×');
+                    $('#sampleOp1').html(Config.multSymbol);
 
                     $('#sampleNode3').html(9);
                     $('#sampleNode2').attr('class',
@@ -187,14 +187,15 @@ function setUpGame(GameController) {
 require([
     'jquery',
     'game/controller',
-    'hbs!/onetwotree/public/resources/templates/modal'
-], function ($, GameController, _ModalTemplate) {
+    'hbs!/onetwotree/public/resources/templates/modal',
+    'app.config'
+], function ($, GameController, _ModalTemplate, Config) {
 
     'use strict';
 
     setUpUtilities();
 
-    setUpInstructionsModal($, _ModalTemplate);
+    setUpInstructionsModal($, _ModalTemplate, Config);
 
     setUpGame(GameController);
 

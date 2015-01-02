@@ -1,8 +1,9 @@
 define([
     'jquery',
     'hbs!/onetwotree/public/resources/templates/board',
-    'hbs!/onetwotree/public/resources/templates/gameOver'
-], function ($, _BoardTemplate, _GameOverTemplate) {
+    'hbs!/onetwotree/public/resources/templates/gameOver',
+    'app.config'
+], function ($, _BoardTemplate, _GameOverTemplate, Config) {
 
     'use strict';
 
@@ -54,7 +55,8 @@ define([
                 var node = model.puzzle.nodes[i];
                 boardData['node' + i] = {
                     index: i,
-                    node: node
+                    node: node,
+                    Config: Config
                 };
             }
 

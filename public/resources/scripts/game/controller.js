@@ -4,9 +4,10 @@ define([
     'game/view',
     'game/dataStructures/operation',
     'game/puzzleGenerator',
-    'hbs!/onetwotree/public/resources/templates/inputValue'
+    'hbs!/onetwotree/public/resources/templates/inputValue',
+    'app.config'
 ], function ($, GameModel, GameView, Operation, PuzzleGenerator,
-    _InputValueTemplate) {
+    _InputValueTemplate, Config) {
 
     'use strict';
 
@@ -79,16 +80,16 @@ define([
                 op;
 
             switch ($(opStr).val()) {
-                case '+':
+                case Config.addSymbol:
                     op = Operation.ADD();
                     break;
-                case '-':
+                case Config.subSymbol:
                     op = Operation.SUB();
                     break;
-                case '×':
+                case Config.multSymbol:
                     op = Operation.MULT();
                     break;
-                case '÷':
+                case Config.divSymbol:
                     op = Operation.DIV();
                     break;
                 default:
