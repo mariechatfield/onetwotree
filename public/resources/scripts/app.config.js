@@ -7,7 +7,8 @@ define([
     	addSymbol: '+',
     	subSymbol: '—',
     	multSymbol: '×',
-    	divSymbol: '÷'
+    	divSymbol: '÷',
+    	setNodeBoxSize: function () { }
     }
 
 });

@@ -2,12 +2,16 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
     font-family: 'Josefin Slab', serif;
+    font-size: 10px;
+}
+.node, .btn {
+    font-size: 1.5em;
+}
+.op {
+    font-size: 1.75em;
 }
 p {
     font-family: 'Roboto Slab', serif;
-}
-.btn {
-    font-size: 1.5em;
 }
 #divider {
     border-bottom: 1px solid #0a1d29;
@@ -36,8 +40,6 @@ p {
     height: 40%;
     z-index: 2;
     padding: 5%;
-    font-size: 2em;
-    line-height: 0.2em;
     text-align: center;
     color: #fff;
     background-color: #5bc0de;
@@ -60,7 +62,7 @@ p {
     float: right;
 }
 .navbar .navbar-brand {
-    font-size: 150%;
+    font-size: 2em;
 }
 .navbar .navbar-brand:hover {
     color: #73a3a2;

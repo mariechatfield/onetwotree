@@ -13,8 +13,8 @@ define([
     /**
      * Set the size of each node box relative to the width of the workspace.
      */
-    function setNodeBoxSize() {
-        var maxWidth, maxHeight;
+    Config.setNodeBoxSize = function () {
+        var maxWidth, maxHeight, fontSize;
 
         maxWidth = Math.floor($('#workspace').width() / (
             maxNodesPerRow + 1));
@@ -24,16 +24,7 @@ define([
             'width': maxWidth + 'px',
             'height': maxHeight + 'px'
         });
-
-        /* Adjust alert size as well. */
-        $('#alert').css('width', $('#workspace').width());
     }
-
-    /*
-     * Adjust node box size as window size changes.
-     * Make sure handler is attached only once to prevent duplicate calls.
-     */
-    $(window).off('resize').on('resize', setNodeBoxSize);
 
     /**
      * Constructor for the view of the game MVC.
@@ -87,7 +78,7 @@ define([
                 maxNodesPerRow = 6;
             }
 
-            setNodeBoxSize();
+            Config.setNodeBoxSize();
 
             window.scrollTo(0, 0);
         };

@@ -24,7 +24,7 @@ require(['jquery'], function () {
 /**
  * Set up any global utility methods that will be used in the application.
  */
-function setUpUtilities() {
+function setUpUtilities(Config) {
     'use strict';
 
     // String format, from http://stackoverflow.com/a/4673436
@@ -37,6 +37,68 @@ function setUpUtilities() {
             });
         };
     }
+
+    /**
+     * Return the current Bootstrap device view.
+     * From http://stackoverflow.com/a/15150381
+     *
+     * @return {string} current Bootstrap device view
+     */
+    var findBootstrapEnvironment = function findBootstrapEnvironment() {
+        var envs = ['xs', 'sm', 'md', 'lg'];
+
+        var $el = $('<div>');
+        $el.appendTo($('body'));
+
+        for (var i = envs.length - 1; i >= 0; i--) {
+            var env = envs[i];
+
+            $el.addClass('hidden-'+env);
+            if ($el.is(':hidden')) {
+                $el.remove();
+                return env;
+            }
+        }
+    };
+
+    var adjustSizes = function () {
+        var workspaceWidth = $('#workspace').width(),
+            fontSize;
+
+        Config.setNodeBoxSize();
+
+        /* Adjust alert size as well. */
+        $('#alert').css({'width': workspaceWidth});
+
+
+        switch (findBootstrapEnvironment()) {
+            case 'xs': {
+                fontSize = '10px';
+                break;
+            }
+            case 'sm': {
+                fontSize = '12px';
+                break;
+            }
+            case 'md': {
+                fontSize = '14px';
+                break;
+            }
+            case 'lg': {
+                fontSize = '16px';
+                break;
+            }
+            default:
+                fontSize = '16px';
+        }
+
+        $('body').css({'font-size': fontSize});
+        
+    };
+
+    adjustSizes();
+
+    $(window).on('resize', adjustSizes);
 }
 
 /**
@@ -193,7 +255,7 @@ require([
 
     'use strict';
 
-    setUpUtilities();
+    setUpUtilities(Config);
 
     setUpInstructionsModal($, _ModalTemplate, Config);
 
