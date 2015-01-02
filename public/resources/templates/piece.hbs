@@ -14,9 +14,13 @@
 	</button>
 
 	{{#if node.op}}
-	<button id="{{index}}op" class="btn btn-info op"
+	<select id="{{index}}op" class="form-control op"
 	{{#unless node.op.mutable}}disabled="disabled"{{/unless}}>
-		{{node.op.symbol}}
-	</button>
+		<option value=""></option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="×">×</option>
+        <option value="÷">÷</option>
+	</select>
 	{{/if}}
 </span>

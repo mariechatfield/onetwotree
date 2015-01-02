@@ -38,6 +38,13 @@ p {
     padding: 5%;
     font-size: 2em;
     line-height: 0.2em;
+    text-align: center;
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.op:disabled {
+    color: #5bc0de;
 }
 #inputValue {
     width: 95%;

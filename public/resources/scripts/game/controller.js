@@ -4,11 +4,9 @@ define([
     'game/view',
     'game/dataStructures/operation',
     'game/puzzleGenerator',
-    'hbs!/onetwotree/public/resources/templates/inputValue',
-    'hbs!/onetwotree/public/resources/templates/inputOp'
+    'hbs!/onetwotree/public/resources/templates/inputValue'
 ], function ($, GameModel, GameView, Operation, PuzzleGenerator,
-    _InputValueTemplate,
-    _InputOpTemplate) {
+    _InputValueTemplate) {
 
     'use strict';
 
@@ -70,52 +68,40 @@ define([
 
         /* Set listener on operations. */
         $('.nodeBox .op').click(function (event) {
-            var index = parseInt(event.target.id),
-                allNodes = model.puzzle.nodes,
-                node = allNodes[index],
-                opStr = '#' + index + 'op';
-
-            /* Only process if operation div itself is clicked, not children. */
-            if (event.target !== this) {
-                return;
-            }
-
             /* Remove any existing forms. */
             $('#inputForm').remove();
-
-            /* Inject HTML for this form into operation. */
-            $(opStr).html(_InputOpTemplate(node));
-            $('#inputOp').focus();
-
-            /* Parse input and process. */
-            $('#inputOp').change(function () {
-                var op;
-
-                switch ($('#inputOp').val()) {
-                    case 'add':
-                        op = Operation.ADD();
-                        break;
-                    case 'sub':
-                        op = Operation.SUB();
-                        break;
-                    case 'mult':
-                        op = Operation.MULT();
-                        break;
-                    case 'div':
-                        op = Operation.DIV();
-                        break;
-                    default:
-                        op = Operation.NULL;
-                }
-
-                if (index >= 0 && index < allNodes.length) {
-                    model.playTurnOp(index, op);
-                    view.render();
-                    setListeners();
-                }
-            });
-
         });
+
+        $('.nodeBox .op').change(function (event) {
+            var index = parseInt(event.target.id),
+                allNodes = model.puzzle.nodes,
+                opStr = '#' + index + 'op',
+                op;
+
+            switch ($(opStr).val()) {
+                case '+':
+                    op = Operation.ADD();
+                    break;
+                case '-':
+                    op = Operation.SUB();
+                    break;
+                case '×':
+                    op = Operation.MULT();
+                    break;
+                case '÷':
+                    op = Operation.DIV();
+                    break;
+                default:
+                    op = Operation.NULL;
+            }
+
+            if (index >= 0 && index < allNodes.length) {
+                model.playTurnOp(index, op);
+                view.render();
+                setListeners();
+            }
+
+        }); 
 
         setAppListeners();
     }

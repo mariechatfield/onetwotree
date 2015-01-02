@@ -66,6 +66,13 @@ define([
             /* Inject HTML from Handlebars template into the given element. */
             $(el).html(_BoardTemplate(boardData));
 
+            for (i = 0; i < model.puzzle.numNodes; i++) {
+                if (!model.puzzle.nodes[i].op) {
+                    break;
+                }
+                $('#' + i + 'op').val(model.puzzle.nodes[i].op.symbol);
+            }
+
             /* Render the points view. */
             this.renderPoints();
 
