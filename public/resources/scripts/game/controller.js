@@ -178,7 +178,12 @@ define([
          * Start the game.
          */
         this.startGame = function () {
-            var that = this;
+            var that = this,
+                i;
+
+            for (i = 0; i < model.puzzle.nodes.length; i++) {
+                model.puzzle.nodes[i].verify();
+            }
 
             view.render();
             setListeners();

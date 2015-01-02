@@ -1,6 +1,14 @@
 <span id="{{index}}nodeBox" class="nodeBox btn-group btn-group-vertical">
 	<button id="{{index}}node" 
-	class="btn {{#if node.valid}}btn-default{{else}}btn-danger{{/if}} node" 
+	class="btn 
+	{{#if node.completed}}
+		{{#if node.valid }}
+			btn-success
+		{{else}}
+			btn-danger
+		{{/if}}
+	{{else}}btn-default{{/if}}
+	node" 
 	{{#unless node.mutable}}disabled="disabled"{{/unless}}>
 		{{#if node.value}}{{node.value}}{{/if}}
 	</button>

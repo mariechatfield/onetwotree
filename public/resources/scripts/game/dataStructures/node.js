@@ -17,6 +17,9 @@ define([
         /** @type {Boolean} mutable - true if user can edit, false otherwise */
         this.mutable = true;
 
+        /** @type {Boolean} completed - true if calculation is complete, false otherwise */
+        this.completed = true;
+
         /** @type {Boolean} valid - true if node is valid, false otherwise */
         this.valid = true;
 
@@ -37,6 +40,9 @@ define([
      */
     function verifyInternalNode(node) {
 
+        node.completed = false;
+        node.valid = true;
+
         /* If this node's value is not set, assume true. */
         if (node.value === 0) {
             return true;
@@ -52,6 +58,8 @@ define([
             0) {
             return true;
         }
+
+        node.completed = true;
 
         /* 
          * This node has defined value, operation, and children.
@@ -86,6 +94,8 @@ define([
         node.op = Operation.NULL;
         node.leftChild = leftChildIn;
         node.rightChild = rightChildIn;
+
+        node.completed = false;
 
         /* Establish this node as the parent of its children. */
         leftChildIn.rightParent = node;
