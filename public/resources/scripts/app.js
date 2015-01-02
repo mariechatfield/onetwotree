@@ -75,10 +75,11 @@ function setUpInstructionsModal($, _ModalTemplate) {
                 {
                     /* Beat 2 */
                     $('#sampleNode1').html(14);
+                    $('#sampleNode1').attr('class', 'btn btn-success node');
 
                     $('#sampleNode3').html(8);
                     $('#sampleNode2').attr('class',
-                        'btn btn-default node');
+                        'btn btn-success node');
                     break;
                 }
 
@@ -86,6 +87,8 @@ function setUpInstructionsModal($, _ModalTemplate) {
                 {
                     /* Beat 3 (and reset) */
                     $('#sampleNode1').html('');
+
+                    $('#sampleNode1').attr('class', 'btn btn-default node');
                     $('#sampleOp1').html('');
                     $('#sampleNode3').html('');
                     count = 0;
