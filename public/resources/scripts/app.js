@@ -67,10 +67,6 @@ function setUpUtilities(Config) {
 
         Config.setNodeBoxSize();
 
-        /* Adjust alert size as well. */
-        $('#alert').css({'width': workspaceWidth});
-
-
         switch (findBootstrapEnvironment()) {
             case 'xs': {
                 fontSize = '10px';

@@ -14,9 +14,10 @@ define([
      * Set the size of each node box relative to the width of the workspace.
      */
     Config.setNodeBoxSize = function () {
-        var maxWidth, maxHeight, fontSize;
+        var maxWidth, maxHeight, fontSize,
+            workspaceWidth = $('#workspace').width();
 
-        maxWidth = Math.floor($('#workspace').width() / (
+        maxWidth = Math.floor(workspaceWidth / (
             maxNodesPerRow + 1));
         maxHeight = Math.floor(maxWidth * 1.4);
 
@@ -24,6 +25,9 @@ define([
             'width': maxWidth + 'px',
             'height': maxHeight + 'px'
         });
+
+        /* Adjust alert size as well. */
+        $('#alert').css({'width': workspaceWidth});
     }
 
     /**
