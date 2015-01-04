@@ -107,10 +107,7 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
     'use strict';
 
     /* Inject the modal HTML from Handlebars template into div. */
-    $('#instructions').html(_ModalTemplate());
-
-    /* Set operation character - displays incorrectly otherwise. */
-    $('#sampleOp2').html(Config.divSymbol);
+    $('#instructions').html(_ModalTemplate(Config));
 
     /* Start the animation timer. */
 
@@ -121,7 +118,8 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
             case 0:
                 {
                     /* Beat 1 */
-                    $('#sampleOp1').html(Config.multSymbol);
+                    $('#sampleNode1').html(14);
+                    
 
                     $('#sampleNode3').html(9);
                     $('#sampleNode2').attr('class',
@@ -132,7 +130,7 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
             case 1:
                 {
                     /* Beat 2 */
-                    $('#sampleNode1').html(14);
+                    $('#sampleOp1').val(Config.multSymbol);
                     $('#sampleNode1').attr('class', 'btn btn-success node');
 
                     $('#sampleNode3').html(8);
@@ -145,10 +143,13 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
                 {
                     /* Beat 3 (and reset) */
                     $('#sampleNode1').html('');
-
                     $('#sampleNode1').attr('class', 'btn btn-default node');
-                    $('#sampleOp1').html('');
+                    
+                    $('#sampleOp1').val('');
+                    
                     $('#sampleNode3').html('');
+                    $('#sampleNode3').attr('class', 'btn btn-default node');
+                    
                     count = 0;
                     break;
                 }

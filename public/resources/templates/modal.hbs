@@ -11,7 +11,13 @@
 
                 <span class="nodeBoxSample btn-group btn-group-vertical">
                     <button id="sampleNode1" class="btn btn-default node"></button>
-                    <button id="sampleOp1" class="btn btn-info op"></button>
+                    <select id="sampleOp1" class="form-control op">
+                        <option value=""></option>
+                        <option value="{{addSymbol}}">{{addSymbol}}</option>
+                        <option value="{{subSymbol}}">{{subSymbol}}</option>
+                        <option value="{{multSymbol}}">{{multSymbol}}</option>
+                        <option value="{{divSymbol}}">{{divSymbol}}</option>
+                    </select>
                 </span>
 
                 <br>
@@ -45,7 +51,13 @@
 
                 <span class="nodeBoxSample btn-group btn-group-vertical">
                     <button id="sampleNode2" class="btn btn-default node" disabled="disabled">7</button>
-                    <button id="sampleOp2" class="btn btn-info op" disabled="disabled"></button>
+                    <select id="sampleOp2" class="form-control op">
+                        <option value=""></option>
+                        <option value="{{addSymbol}}">{{addSymbol}}</option>
+                        <option value="{{subSymbol}}">{{subSymbol}}</option>
+                        <option value="{{multSymbol}}">{{multSymbol}}</option>
+                        <option value="{{divSymbol}}" selected>{{divSymbol}}</option>
+                    </select>
                 </span>
 
                 <br>
