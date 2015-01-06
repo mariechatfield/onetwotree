@@ -148,7 +148,7 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
                     $('#sampleOp1').val('');
                     
                     $('#sampleNode3').html('');
-                    $('#sampleNode3').attr('class', 'btn btn-default node');
+                    $('#sampleNode2').attr('class', 'btn btn-default node');
                     
                     count = 0;
                     break;
