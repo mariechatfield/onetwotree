@@ -68,7 +68,7 @@ define([
         });
 
         /* Set listener on operations. */
-        $('.nodeBox .op').click(function (event) {
+        $('.nodeBox .op').click(function () {
             /* Remove any existing forms. */
             $('#inputForm').remove();
         });
@@ -102,7 +102,7 @@ define([
                 setListeners();
             }
 
-        }); 
+        });
 
         setAppListeners();
     }
@@ -140,7 +140,7 @@ define([
             }
 
             model = new GameModel(puzzleSpecs);
-            view = new GameView('#workspace', model);
+            view = new GameView('#board', model);
 
             this.startGame();
         };
@@ -201,6 +201,11 @@ define([
                 }, 400);
 
             }
+        };
+
+        this.render = function () {
+            view.render();
+            setListeners();
         };
 
     };

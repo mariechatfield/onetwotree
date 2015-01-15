@@ -82,7 +82,31 @@
                         <button id="start" class="btn btn-info">Start</button>
                     </div>
 
-                    <div id="workspace"></div>
+                    <div id="workspace">
+
+                        <div id="board"></div>
+
+                        <div id="alert"></div>
+                        <br>
+                        <div>
+                            <button id="reset" class="btn btn-warning">Reset</button>
+                            <button id="playNew" class="btn btn-warning">New Puzzle</button>
+                        </div>
+                        <br>
+
+                        <div class="gameForm">
+                            <div id="viewSwitch" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default" disabled="disabled">View Mode: </label>
+                                <label id="pyramid" class="btn btn-primary active">
+                                    <input type="radio" name="options" autocomplete="off"> Pyramid
+                                </label>
+                                <label id="funnel" class="btn btn-primary">
+                                    <input type="radio" name="options" autocomplete="off"> Funnel
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
 
                     <div id="divider"></div>
 

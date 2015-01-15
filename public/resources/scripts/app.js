@@ -53,7 +53,7 @@ function setUpUtilities(Config) {
         for (var i = envs.length - 1; i >= 0; i--) {
             var env = envs[i];
 
-            $el.addClass('hidden-'+env);
+            $el.addClass('hidden-' + env);
             if ($el.is(':hidden')) {
                 $el.remove();
                 return env;
@@ -62,34 +62,39 @@ function setUpUtilities(Config) {
     };
 
     var adjustSizes = function () {
-        var workspaceWidth = $('#workspace').width(),
-            fontSize;
+        var fontSize;
 
         Config.setNodeBoxSize();
 
         switch (findBootstrapEnvironment()) {
-            case 'xs': {
-                fontSize = '10px';
-                break;
-            }
-            case 'sm': {
-                fontSize = '12px';
-                break;
-            }
-            case 'md': {
-                fontSize = '14px';
-                break;
-            }
-            case 'lg': {
-                fontSize = '16px';
-                break;
-            }
+            case 'xs':
+                {
+                    fontSize = '10px';
+                    break;
+                }
+            case 'sm':
+                {
+                    fontSize = '12px';
+                    break;
+                }
+            case 'md':
+                {
+                    fontSize = '14px';
+                    break;
+                }
+            case 'lg':
+                {
+                    fontSize = '16px';
+                    break;
+                }
             default:
                 fontSize = '16px';
         }
 
-        $('body').css({'font-size': fontSize});
-        
+        $('body').css({
+            'font-size': fontSize
+        });
+
     };
 
     adjustSizes();
@@ -119,7 +124,7 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
                 {
                     /* Beat 1 */
                     $('#sampleNode1').html(14);
-                    
+
 
                     $('#sampleNode3').html(9);
                     $('#sampleNode2').attr('class',
@@ -131,7 +136,8 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
                 {
                     /* Beat 2 */
                     $('#sampleOp1').val(Config.multSymbol);
-                    $('#sampleNode1').attr('class', 'btn btn-success node');
+                    $('#sampleNode1').attr('class',
+                        'btn btn-success node');
 
                     $('#sampleNode3').html(8);
                     $('#sampleNode2').attr('class',
@@ -143,13 +149,15 @@ function setUpInstructionsModal($, _ModalTemplate, Config) {
                 {
                     /* Beat 3 (and reset) */
                     $('#sampleNode1').html('');
-                    $('#sampleNode1').attr('class', 'btn btn-default node');
-                    
+                    $('#sampleNode1').attr('class',
+                        'btn btn-default node');
+
                     $('#sampleOp1').val('');
-                    
+
                     $('#sampleNode3').html('');
-                    $('#sampleNode2').attr('class', 'btn btn-default node');
-                    
+                    $('#sampleNode2').attr('class',
+                        'btn btn-default node');
+
                     count = 0;
                     break;
                 }
@@ -178,7 +186,7 @@ function setUpGame(GameController) {
         }
 
         $('#points').html('');
-        $('#workspace').html('');
+        $('#board').html('');
         $('#workspace').hide();
 
         $('#newGameForm').show();
@@ -217,11 +225,18 @@ function setUpGame(GameController) {
          * Attach appplication-wide listeners.
          */
         function setAppListeners() {
-            $('#reset').click(function () {
+            $('#reset').off('click').on('click', function () {
                 game.reset();
             });
 
-            $('#playNew').click(playNewGame);
+            $('#playNew').off('click').on('click', playNewGame);
+
+            $('#funnel, #pyramid').off('click').on('click',
+                function () {
+                    $(this).addClass('active').siblings(
+                        '.btn').removeClass('active');
+                    game.render();
+                });
         }
 
         /* Initialize game controller and start game. */

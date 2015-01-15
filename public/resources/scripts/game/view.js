@@ -1,9 +1,11 @@
 define([
     'jquery',
     'hbs!/onetwotree/public/resources/templates/board',
+    'hbs!/onetwotree/public/resources/templates/board_funnel',
     'hbs!/onetwotree/public/resources/templates/gameOver',
     'app.config'
-], function ($, _BoardTemplate, _GameOverTemplate, Config) {
+], function ($, _BoardTemplate, _BoardFunnelTemplate, _GameOverTemplate,
+    Config) {
 
     'use strict';
 
@@ -14,7 +16,7 @@ define([
      * Set the size of each node box relative to the width of the workspace.
      */
     Config.setNodeBoxSize = function () {
-        var maxWidth, maxHeight, fontSize,
+        var maxWidth, maxHeight,
             workspaceWidth = $('#workspace').width();
 
         maxWidth = Math.floor(workspaceWidth / (
@@ -26,15 +28,17 @@ define([
             'width': maxWidth + 'px'
         });
         $('.node').css({
-            'height': (maxHeight * .65) + 'px'
+            'height': (maxHeight * 0.65) + 'px'
         });
         $('.op').css({
-            'height': (maxHeight * .35) + 'px'
+            'height': (maxHeight * 0.35) + 'px'
         });
 
         /* Adjust alert size as well. */
-        $('#alert').css({'width': workspaceWidth});
-    }
+        $('#alert').css({
+            'width': workspaceWidth
+        });
+    };
 
     /**
      * Constructor for the view of the game MVC.
@@ -67,7 +71,11 @@ define([
             boardData.hard = model.puzzle.numNodes === 21;
 
             /* Inject HTML from Handlebars template into the given element. */
-            $(el).html(_BoardTemplate(boardData));
+            if ($('#funnel').hasClass('btn btn-primary active')) {
+                $(el).html(_BoardFunnelTemplate(boardData));
+            } else {
+                $(el).html(_BoardTemplate(boardData));
+            }
 
             for (i = 0; i < model.puzzle.numNodes; i++) {
                 if (!model.puzzle.nodes[i].op) {

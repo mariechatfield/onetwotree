@@ -1,0 +1,25 @@
+<span id="{{index}}nodeBox" class="nodeBox btn-group btn-group-vertical">
+	{{#if node.op}}
+	<select id="{{index}}op" class="form-control op">
+		<option value=""></option>
+        <option value="{{Config.addSymbol}}">{{Config.addSymbol}}</option>
+        <option value="{{Config.subSymbol}}">{{Config.subSymbol}}</option>
+        <option value="{{Config.multSymbol}}">{{Config.multSymbol}}</option>
+        <option value="{{Config.divSymbol}}">{{Config.divSymbol}}</option>
+	</select>
+	{{/if}}
+
+	<button id="{{index}}node" 
+	class="btn 
+	{{#if node.completed}}
+		{{#if node.valid }}
+			btn-success
+		{{else}}
+			btn-danger
+		{{/if}}
+	{{else}}btn-default{{/if}}
+	node" 
+	{{#unless node.mutable}}disabled="disabled"{{/unless}}>
+		{{#if node.value}}{{node.value}}{{/if}}
+	</button>	
+</span>
