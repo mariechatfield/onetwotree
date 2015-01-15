@@ -172,6 +172,8 @@ define([
                 model.puzzle.nodes[i].verify();
             }
 
+            $('#board').removeClass('gameOver');
+            $('#alert').empty();
             view.render();
             setListeners();
 
