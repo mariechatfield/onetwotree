@@ -27,10 +27,10 @@ define([
         $('.nodeBox').css({
             'width': maxWidth + 'px'
         });
-        $('.node').css({
+        $('.nodeBox .node').css({
             'height': (maxHeight * 0.65) + 'px'
         });
-        $('.op').css({
+        $('.nodeBox .op').css({
             'height': (maxHeight * 0.35) + 'px'
         });
 

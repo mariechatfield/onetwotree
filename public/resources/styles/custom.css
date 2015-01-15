@@ -33,6 +33,14 @@ p {
     width: 60px;
     height: 90px;
 }
+.nodeBoxSample .node {
+    width: 100%;
+    height: 55%;
+}
+.nodeBoxSample .op {
+    width: 100%;
+}
+
 .nodeBox {
     margin-bottom: 2%;
 }
