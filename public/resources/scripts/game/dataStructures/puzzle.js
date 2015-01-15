@@ -120,7 +120,6 @@ define([
         for (i = 0; i < this.initOps.length; i++) {
             if (this.initOps[i] !== Operation.NULL) {
                 this.nodes[i].op = this.initOps[i];
-                this.nodes[i].op.mutable = false;
             }
         }
     };
