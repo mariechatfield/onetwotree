@@ -21,9 +21,14 @@ define([
             maxNodesPerRow + 1));
         maxHeight = Math.floor(maxWidth * 1.4);
 
-        $('.nodeBox').css({
+        $('.node').css({
             'width': maxWidth + 'px',
-            'height': maxHeight + 'px'
+            'height': (maxHeight * .65) + 'px'
+        });
+
+        $('.op').css({
+            'width': maxWidth + 'px',
+            'height': (maxHeight * .35) + 'px'
         });
 
         /* Adjust alert size as well. */

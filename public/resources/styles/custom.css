@@ -30,16 +30,16 @@ p {
     width: 60px;
     height: 90px;
 }
+.nodeBox {
+    margin-bottom: 2%;
+}
 .node {
-    height: 55%;
-    z-index: 1;
-    margin: 5%;
     padding: 10%;
 }
 .op {
-    height: 40%;
-    z-index: 2;
     padding: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     text-align: center;
     color: #fff;
     background-color: #5bc0de;
