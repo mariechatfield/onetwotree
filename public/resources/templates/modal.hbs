@@ -5,12 +5,20 @@
             <h3 class="modal-title" id="myModalLabel">Instructions</h3>
         </div>
         <div class="modal-body">
-            <h4>Combine numbers at the bottom of the tree to reach numbers at the top!</h4>
+            <h4>Combine numbers at the top of the tree to reach numbers at the bottom!</h4>
             <br>
             <div class="pull-left">
 
                 <span class="nodeBoxSample btn-group btn-group-vertical">
-                    <button id="sampleNode1" class="btn btn-default node"></button>
+                    <button class="btn btn-success node" disabled="disabled">2</button>
+                </span>
+                <span class="nodeBoxSample btn-group btn-group-vertical">
+                    <button class="btn btn-success node" disabled="disabled">7</button>
+                </span>
+
+                <br>
+
+                <span class="nodeBoxSample btn-group btn-group-vertical">
                     <select id="sampleOp1" class="form-control op">
                         <option value=""></option>
                         <option value="{{addSymbol}}">{{addSymbol}}</option>
@@ -18,15 +26,7 @@
                         <option value="{{multSymbol}}">{{multSymbol}}</option>
                         <option value="{{divSymbol}}">{{divSymbol}}</option>
                     </select>
-                </span>
-
-                <br>
-
-                <span class="nodeBoxSample btn-group btn-group-vertical">
-                    <button class="btn btn-success node" disabled="disabled">2</button>
-                </span>
-                <span class="nodeBoxSample btn-group btn-group-vertical">
-                    <button class="btn btn-success node" disabled="disabled">7</button>
+                    <button id="sampleNode1" class="btn btn-default node"></button>
                 </span>
 
             </div>
@@ -50,7 +50,15 @@
             <div class="pull-right">
 
                 <span class="nodeBoxSample btn-group btn-group-vertical">
-                    <button id="sampleNode2" class="btn btn-default node" disabled="disabled">7</button>
+                    <button class="btn btn-default node" disabled="disabled">56</button>
+                </span>
+                <span class="nodeBoxSample btn-group btn-group-vertical">
+                    <button id="sampleNode3" class="btn btn-default node"></button>
+                </span>
+
+                <br>
+
+                <span class="nodeBoxSample btn-group btn-group-vertical">
                     <select id="sampleOp2" class="form-control op">
                         <option value=""></option>
                         <option value="{{addSymbol}}">{{addSymbol}}</option>
@@ -58,15 +66,7 @@
                         <option value="{{multSymbol}}">{{multSymbol}}</option>
                         <option value="{{divSymbol}}" selected>{{divSymbol}}</option>
                     </select>
-                </span>
-
-                <br>
-
-                <span class="nodeBoxSample btn-group btn-group-vertical">
-                    <button class="btn btn-default node" disabled="disabled">56</button>
-                </span>
-                <span class="nodeBoxSample btn-group btn-group-vertical">
-                    <button id="sampleNode3" class="btn btn-default node"></button>
+                    <button id="sampleNode2" class="btn btn-default node" disabled="disabled">7</button>
                 </span>
 
             </div>

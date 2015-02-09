@@ -29,18 +29,22 @@ p {
     margin-top: 20px;
     text-align: right;
 }
-.nodeBoxSample {
-    width: 60px;
-    height: 90px;
-}
 .nodeBoxSample .node {
-    width: 100%;
-    height: 55%;
+    width: 60px;
+    height: 60px;
+    padding: 10%;
 }
 .nodeBoxSample .op {
-    width: 100%;
+    width: 60px;
+    height: 30px;
+    padding: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
 }
-
 .nodeBox {
     margin-bottom: 2%;
 }

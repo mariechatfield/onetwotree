@@ -1,10 +1,9 @@
 define([
     'jquery',
-    'hbs!/onetwotree/public/resources/templates/board',
     'hbs!/onetwotree/public/resources/templates/board_funnel',
     'hbs!/onetwotree/public/resources/templates/gameOver',
     'app.config'
-], function ($, _BoardTemplate, _BoardFunnelTemplate, _GameOverTemplate,
+], function ($, _BoardFunnelTemplate, _GameOverTemplate,
     Config) {
 
     'use strict';
@@ -71,11 +70,7 @@ define([
             boardData.hard = model.puzzle.numNodes === 21;
 
             /* Inject HTML from Handlebars template into the given element. */
-            if ($('#funnel').hasClass('btn btn-primary active')) {
-                $(el).html(_BoardFunnelTemplate(boardData));
-            } else {
-                $(el).html(_BoardTemplate(boardData));
-            }
+            $(el).html(_BoardFunnelTemplate(boardData));
 
             for (i = 0; i < model.puzzle.numNodes; i++) {
                 if (!model.puzzle.nodes[i].op) {
