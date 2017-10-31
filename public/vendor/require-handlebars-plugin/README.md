@@ -139,7 +139,7 @@ I encourage you to list the name of the template and give a description, though 
 
 If you want to build stylesheets that are comprised of only styles needed by the templates that your app uses, I encourage you to add a `styles` property to the meta info:
 
-```
+```html
 {{!
 {
   "name" : "template1",
