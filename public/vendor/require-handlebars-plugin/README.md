@@ -140,13 +140,11 @@ I encourage you to list the name of the template and give a description, though 
 If you want to build stylesheets that are comprised of only styles needed by the templates that your app uses, I encourage you to add a `styles` property to the meta info:
 
 ```html
-{{!
 {
   "name" : "template1",
   "description" : "A nice template.",
   "styles" : ["templatecss"]
 }
-}}
 ```
 
 This will inject a link tag in dev mode to load in this style dynamically. At build time, a screen.build.css is created. At this time it is just a list of import statements. These can be inlined by many existing tools. Eventually I'd love it to just happen.
